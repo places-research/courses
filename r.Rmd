@@ -1,0 +1,405 @@
+---
+title: "Introdução ao R e RStudio"
+date: "Last updated: `r format(Sys.time(), '%d %B, %Y')`"
+    
+output:
+  html_document:
+    toc_depth: 3
+    include:
+      in_header: head.html
+      after_body: footer.html
+    theme: flatly
+    highlight: textmate
+    mathjax: null
+    lib_dir: libs
+    css: styles.css
+    logo: logo.jpg
+    toc_float:
+      collapsed: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Conhecendo o R {.tabset .tabset-fade .tabset-pills}
+
+### Instalação do R
+
+:::justa
+> Baixar e instalar o R: <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">link</a>
+
+No link acima é apresentado o processo de instalação para Windows. No mesmo site é possível encontrar procedimentos de instalação para outros sistemas operacionais. 
+
+Links adicionais:    
+<a href="https://rpubs.com/cassiorampinelli/488999" target="_blank">Visão geral e primeiros passos com R e RStudio</a>
+:::
+
+---
+
+### Instalação do RStudio
+:::justa
+
+> Baixar e instalar o RStudio: <a href="https://rstudio.com/products/rstudio/download/" target="_blank">link</a>
+
+No link acima é apresentado o processo de instalação para Windows. No mesmo site é possível encontrar procedimentos de instalação para outros sistemas operacionais. 
+:::
+
+---
+
+### Interface e funcionalidades 
+
+:::justa
+
+Para uso do R no ambiente RStudio, é inicialmente necessário entender o seu funcionamento. O R é uma linguagem de programação, em plataforma open source, desenvolvida para análise de dados. 
+
+```{r fig.cap="Figure from https://github.com/allisonhorst/stats-illustrations", out.extra="class=external" }
+knitr::include_graphics('./img/welcome_to_rstats_twitter.png')
+```
+
+Em um primeiro momento, o conjunto R + RStudio parece pouco amigável, mas com o tempo, é impossível não apaixonar-se pelas infinitas possibilidades que temos ao utilizar o R. 
+
+```{r fig.cap="Figure from https://github.com/allisonhorst/stats-illustrations", out.extra="class=external" }
+knitr::include_graphics('./img/r_first_then.png')
+```
+
+A comunidade do R é bastante ampla e colaborativa. Assim: BUSQUE AJUDA!!!!!
+
+```{r fig.cap="Figure from https://github.com/allisonhorst/stats-illustrations", out.extra="class=external" }
+knitr::include_graphics('./img/code_hero_rstats.png')
+```
+:::
+
+---
+
+## Variáveis, funções e *packages* {.tabset .tabset-fade .tabset-pills}
+
+Sua estrutura fundamenta-se em uma grande variedade de ferramentas quantitativas, organizadas por meio de **objetos**, **funções** e **packages**. A instalação `base` do R já contempla uma série de funções e *packages*. *Packages* adicionais podem ser instalados quando for necessário ou interessante. Para instalação de *packages*, utiliza-se a função `install.packages()`.   
+
+Instale o pacote `dplyr`. Observe que estamos utilizando a função `install.packages()`, designando o pacote a ser instalado (entre aspas duplas) e o local de onde serão baixados os arquivos para instalação. `CRAN` é uma rede de distribuição do R. Copie e rode a função a seguir no seu **console**. É no **console** que as o R faz sua "magia". 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, results="hide"}
+#install.packages("dplyr", repos = "http://cran.us.r-project.org")
+```
+
+Toda vez que observar funções e trechos de código neste documento, copie e cole no seu console para entender a proposta de cada atividade. 
+:::
+
+
+### R como calculadora
+:::justa
+O R pode ser utilizado como uma simples calculadora. 
+
+Calcule a seguinte expressão:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+2+2
+```
+:::
+
+---
+
+### Variáveis
+:::justa
+Um jeito interessante de preservar as informações de entrada e saída das operações e funções no R, é por meio da designação de `variáveis`. `Variáveis` são objetos designados para possibilitarem a armazenagem e a manipulação de dados.
+
+Agora, experimente armazenar os valores de entrada em variáveis e realizar o mesmo cálculo:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+a <- 2
+b <- 2
+a+b
+```
+Observe que as variáveis aparecem na seção de Environment do RStudio. Essa funcionalidade ajuda na identificação dos dados em análise. 
+
+Faça a seguinte operação:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+a <- 2
+b <- 2
+c <- a+b
+c
+```
+
+> **ATENÇÃO!**   
+O R diferencia letras maiúsculas de minúsculas. CUIDADO!
+
+:::
+
+---
+
+### Tipos de dados no R {.tabset .tabset-fade .tabset-pills}
+:::justa
+No R, os dados são organizados por meio de uma estrutura hierárquica de tipos de dados que podem ser utilizados para armazenar valores em diferentes estruturas. Cada tipo de dado pode ser associado com uma função de teste e uma função de conversão. 
+
+A função de teste retorna sempre TRUE ou FALSE, pois é uma função lógica. 
+
+A função de conversão, quando possível, transforma os dados em diferentes tipos. 
+
+Funções de teste apresentam a estrutura `is.character()` e funções de conversão são `as.character()`. 
+:::
+
+
+Neste tutorial não detalharemos todos os tipos de dados, mas apenas os mais importantes para a análise espacial. Assim, no blog, temos diversas sugestões de tutoriais e documentação geral que contempla todos os tipos de dados.
+
+
+#### Character
+Variáveis `character` são aquelas que contém texto. Para designar uma variável como texto, precisamos colocar seus valores entre aspas. Dados do tipo texto são comuns em variáveis categóricas. 
+
+Experimente:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+d <- "texto"
+is.character(d)
+```
+
+<hr>
+<p> 
+<p> 
+
+#### Numeric
+:::justa
+Dados `numeric` são números. A função `numeric` pode ser utilizada para gerar um vetor com elementos numéricos com valor 0. 
+:::
+
+Faça:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# Criar vetor de cinco posições com valores 0
+numeric(5)
+
+# Gera valor character
+e <- "1980"
+
+# Teste
+is.numeric(e)
+
+# Conversão
+f <- as.numeric("1980")
+
+# Teste
+is.numeric(f)
+```
+<hr>
+<p> 
+<p> 
+
+#### Logical
+A função `logical` gera um vetor lógico com o tamanho desejado e por padrão, cada elemento do vetor recebe o valor `FALSE`. 
+
+
+> Um objeto de qualquer uma desses tipos é chamado de **objeto atômico**.
+
+Mãos à obra:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+logical(3)
+
+# Conversão
+as.logical(c(7,5,0))
+
+# TRUE e FALSE podem ser convertidos em 1 ou 0
+as.logical(c(7,5,0))*1
+```
+Os valores no vetor que são diferentes de *zero*, recebem o valor `TRUE`. 
+
+> A função **`c`**(*combine*) é utilizada para composição de um vetor, combinando valores identificados por índices.
+
+<hr>
+<p> 
+<p> 
+
+### Tipos de classes no R {.tabset .tabset-fade .tabset-pills}
+ 
+Diferentes tipos de dados podem ser utilizados para popular diferentes estruturas de dados ou `classes`. As classes mais comumente utilizadas para análise de dados espaciais são: vetores, matrizes, data frames, listas e factores. 
+
+É por meio das classes que as funções e operadores conseguem saber exatamente o que fazer com um objeto. 
+
+Experimente:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+1+1
+```
+
+
+> Faça `"a" + "b"`
+
+O operador `+` verifica que "a" e "b" não são números (ou que não são do tipo `numeric`) e devolve uma mensagem de erro informando isso. 
+
+
+#### Vetores
+O R é construído com base no conceito de vetores e matrizes. As maior parte das operações é feita para os elementos.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# Definição de vetores
+vector(mode = "numeric", length = 8)
+
+vector(length = 8)
+
+tmp <- data.frame(a=10:15, b=15:20)
+```
+
+<hr>
+<p> 
+<p> 
+
+#### Fatores
+Fatores são vetores de categorias específicas, definidas por meio do parâmetro `levels`. A ordem dos fatores pode ser especificada pela função `ordered`. Experimente:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# Vetor de texto
+tipos.casas <- c("casa", "apartamento", "apartamento", "sobrado")
+
+# Vetor de fatores
+tipos.casas <- factor(c("casa", "apartamento", "apartamento", "sobrado"), levels=c("casa", "apartamento", "sobrado"))
+```
+
+Quando utilizamos dados em estrutura de fatores, é possível gerar sínteses rápidas e simples por meio da função `table`. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+table(tipos.casas)
+```
+
+Dados fatoriais são úteis para o tratamento de dados categóricos, ou que pertencem a um determinado número de classes predeterminadas. Existem muitas feições representadas por meio de dados espaciais que são estruturadas em variáveis discretas. 
+
+```{r fig.cap="Figure from https://github.com/allisonhorst/stats-illustrations", out.extra="class=external" }
+knitr::include_graphics('./img/continuous_discrete.png')
+```
+
+Para ordenar dados fatorias, utilizamos a função `ordered`. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+renda_1 <- factor(c("alta", "alta", "baixa", "baixa", "media", "alta"), levels=c("baixa", "media", "alta")) 
+
+renda_2 <- ordered(c("alta", "alta", "baixa", "baixa", "media", "alta"), levels=c("baixa", "media", "alta")) 
+```
+
+<hr>
+<p> 
+<p> 
+
+#### Listas
+Os tipos de dados `character`, `numeric` e `logical` só podem ser associados a classes de dados nas quais TODOS os elementos são do mesmo tipo. A classe `listas` não tem esse requisito. As listas têm posições (índices) para diferentes topos de elementos. 
+
+Para acessar um elemento em um vetor, utilizamos `[]`. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+vector_teste <- c(5:10)
+vector_teste
+vector_teste[4]
+```
+Para acessar um elemento em uma lista por meio de sua posição, utilizamos `[[]]`. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+colaborador <- list(name="Renata Oliveira", ano.inicio = 2006, posicao = "Professora")
+colaborador
+```
+
+<hr>
+<p> 
+<p> 
+
+#### Matrizes, data.frames e tibble
+Matrizes são um conjunto de vetores. As linhas e colunas das matrizes podem ser nomeadas. Na análise espacial de um dado vetorial, temos uma tabela de atributos em estrutura matricial. As linhas representam as feições e as colunas são os atributos dessas feições. Na representação de dados raster, linhas e colunas representam latitudes e longitudes ou células raster. 
+
+`Data frames` e `tibble` são estruturas tabulares de dados que, diferentemente das matrizes (`matrix`), permitem representar diferentes atributos (e tipos de dados) em diferentes colunas. Esses tipos de classes são utilizadas para organizar dados espaciais (pontos, linhas, áreas e pixels).
+
+<aside>
+Em tabelas de dados espaciais, cada informação representa um fenômeno real por meio de uma feição geográfica e os campos representam atributos associados com cada feição (população, área, altitude etc.). 
+</aside>
+
+A classe `data.frame` no R é composta por uma série de vetores de **comprimento igual** (número de observações) que juntos formam uma estrutura de dados bi-dimensional. Cada vetor registra valores de um atributo específico. Essa é a classe de dados mais comumente utilizada para armazenar dados no R. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+df <- data.frame(dist=seq(0, 400, 100), city=c("Belo Horizonte", "São Paulo", "Rio de Janeiro", "Brasília", "Salvador"))
+str(df)
+```
+
+
+> A função `seq` possibilita a criação de uma sequência de dados por meio de três parâmetros: seq(`valor_inicial`, `valor_final`, `intervalo`). 
+
+Tibbles e data.frames não são muito diferentes. Há alguns detalhes quanto à transformação de dados na criação dessas classes, mas, em linhas gerais, a estrutura de dados em `tibble` é mais eficiente e organizada. 
+
+As seguintes funções são adequadas tanto para `data.frames` como para `tibble`:   
+`names()`   
+`colnames()`   
+`rownames()`   
+`length()`   
+`ncol()`   
+`nrow()`   
+
+> Explore a documentação do `tibble` em: vignette("tibble")
+
+
+Os objetos dessas duas classes podem ser selecionados por meio da estrutura `data.frame[linha, coluna]`, na qual os parâmetros linhas e coluna são os índices desses elementos. 
+
+Para combinar `data.frame` e `tibble` por linhas ou colunas utilizamos, respectivamente, as funções `rbind()` e `cbind()`.
+
+
+Até aqui, já ficou claro que a escolha ou identificação dos tipos e das classes de dados espaciais e não espaciais é muito importante para sua análise. 
+
+<hr>
+<p> 
+<p> 
+
+### Atividades de verificação de aprendizagem
+
+**Questão 1:**
+
+Veja as cores de veículos comercializados por uma concessionária na semana passada. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+colours <- factor(c("red","blue","red","white",
+                    "silver","red","white","silver",
+                    "red","red","white","silver","silver"),
+                  levels=c("red","blue","white","silver","black"))
+```
+
+
+Se você colocar o código a seguir, o que acontece? Responda na atividade da semana.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+colours[4] <- "orange"
+colours
+```
+
+
+Utilize a função `table` para determinar a quantidade de automóveis comercializados de cada cor. 
+
+Copie e cole o resultado (pode ser um print da tela no Canvas).
+
+**Questão 2:** 
+
+Considere:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+car.type <- factor(c("saloon","saloon","hatchback",
+    "saloon","convertible","hatchback","convertible",
+    "saloon", "hatchback","saloon", "saloon",
+    "saloon","hatchback"),
+    levels=c("saloon","hatchback","convertible"))
+```
+Gere a tabela de frequências para os dados `car.type`. 
+
+Experimente: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+table(car.type, colours)
+```
+
+Qual a diferença entre o uso da função `table` com um ou argumentos? 
+Qual a diferença entre `table(car.type, colours)` e `table(colours, car.type)`?
+
+---
+
+## Referências adicionais
++ [Livro sobre Análise espacial no R](https://www.dropbox.com/s/mo65rwtzafrsa5w/analise%20espacial.pdf?dl=0)
+
++ [Curso de R em português](http://material.curso-r.com/)
+
++ [R e Análise espacial](https://mgimond.github.io/Spatial/spatial-autocorrelation-in-r.html)
+
++ [Análise espacial no R](https://rspatial.org/raster/analysis/index.html)
+
++ [Referências de links de consulta para R e R para Jornalistas](https://www.curso-de-programacao-em-r-para-jornalistas.com/2019/10/27/saiba-mais-sobre-o-r/)
+

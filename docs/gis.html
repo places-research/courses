@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Contribuições - Renata Lúcia Magalhães de Oliveira e Lucélia Viviane Vaz Raad" />
+
+
+<title>Introdução do QGIS</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<script src="libs/ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77306155-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cursos 1/2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Fundamentos do ERE</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    GIS e Análise Espacial para Ciências Sociais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gis.html">Introdução ao QGIS</a>
+    </li>
+    <li>
+      <a href="qgis.html">QGIS e GeoDa</a>
+    </li>
+    <li>
+      <a href="verifica_qgis.html">Verificação de aprendizagem</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R para Análise Espacial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r.html">Introdução ao R e RStudio</a>
+    </li>
+    <li>
+      <a href="r2.html">Estatística descritiva com o R</a>
+    </li>
+    <li>
+      <a href="r3.html">Gráficos no R</a>
+    </li>
+    <li>
+      <a href="r4.html">Dados espaciais no R</a>
+    </li>
+    <li>
+      <a href="r5.html">Análise espacial no R</a>
+    </li>
+    <li>
+      <a href="r6.html">Medidas centrográficas</a>
+    </li>
+    <li>
+      <a href="materialr.html">Dicas sobre R</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="qualidade.html">Gestão da Qualidade</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/retaoliveira/R">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introdução do QGIS</h1>
+<h4 class="author">Contribuições - Renata Lúcia Magalhães de Oliveira e Lucélia Viviane Vaz Raad</h4>
+
+</div>
+
+
+<div id="competências-a-serem-desenvolvidas" class="section level1 tabset tabset-fade tabset-pills">
+<h1>Competências a serem desenvolvidas</h1>
+<p>Ao final desse mini-curso, os alunos deverão ser capazes de discutir os seguintes conceitos:</p>
+<ul>
+<li>Pensamento espacial<br />
+</li>
+<li>Introdução à cartografia
+<ul>
+<li>forma e dimensões terrestres<br />
+</li>
+<li>representações: sistemas geodésicos, modelos e datum<br />
+</li>
+<li>sistemas de coordenadas geográficas e projetadas<br />
+</li>
+</ul></li>
+<li>Sistemas de Informações Geográficas (<em>Geographic Information Systems</em>)<br />
+</li>
+<li>Unidades espaciais e representação de fenômenos espaciais<br />
+</li>
+<li>Distâncias<br />
+</li>
+<li>QGIS
+<ul>
+<li>Ambiente e funcionalidades básicas do QGIS<br />
+</li>
+<li>Complementos: instalação e para que servem<br />
+</li>
+<li>Mudança de datum e sistemas de coordenadas<br />
+</li>
+<li>Tabela de atributos<br />
+</li>
+<li>Estruturas de dados espaciais
+<ul>
+<li>classificação: vetoriais e matriciais<br />
+</li>
+<li>interoperabilidade<br />
+</li>
+<li>geocodificação<br />
+</li>
+</ul></li>
+<li>Funções básicas em GIS
+<ul>
+<li>seleção por atributo e por localização<br />
+</li>
+<li>join por código e join espacial<br />
+</li>
+<li>mapas temáticos<br />
+</li>
+<li>geração de centroides e agregação de variaveis<br />
+</li>
+<li>conceito de redes<br />
+</li>
+<li>layout de impressão</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="palavras-chave" class="section level2">
+<h2>Palavras-chave</h2>
+<p><img src="img/wordcloud.png" width="60%" /></p>
+<hr />
+</div>
+<div id="pensamento-espacial" class="section level2">
+<h2>Pensamento espacial</h2>
+<blockquote>
+<p>” todas as coisas são parecidas mas coisas mais próximas se parecem mais que coisas mais distantes”. Waldo Tobler</p>
+</blockquote>
+<ul>
+<li><p>Encontrar significado em formas, tamanho, orientação, localização, direção ou trajetória de objetos, processos e fenômenos</p></li>
+<li><p>Encontrar significado na localização relativa de múltiplos objetos, processos e fenômenos.</p>
+<ul>
+<li>O que diferencia dados espaciais e não espaciais?<br />
+</li>
+<li>O que existe em uma determinada localização?<br />
+</li>
+<li>Onde posso encontrar um determinado objeto?<br />
+</li>
+<li>O que mudou ao longo do tempo?<br />
+</li>
+<li>Qual o melhor caminho?<br />
+</li>
+<li>Como os objetos são distribuídos no espaço?<br />
+</li>
+<li>Como as condições serão alteradas no futuro?</li>
+</ul></li>
+</ul>
+<p><img src="img/pensamento_espacial.png" width="50%" /></p>
+<hr />
+</div>
+</div>
+<div id="representações-sistemas-geodésicos-modelos-e-datum" class="section level1">
+<h1>Representações: sistemas geodésicos, modelos e datum</h1>
+<div id="sistemas-geodésicos" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Sistemas Geodésicos</h2>
+<div id="geóide" class="section level3">
+<h3>Geóide</h3>
+<p>Forma irregular, com ondulações e depressões</p>
+<p><img src="img/gravidade_terra.png" width="50%" /></p>
+<p>É preciso buscar um modelo mais simples para representar a Terra.</p>
+<p><strong>Geóide</strong>: Superfície delimitada pelo nível médio dos mares supostamente prolongado por sob os continentes<br />
+<strong>Elipsóide</strong>: Modelo matemático que define a superfície da Terra.</p>
+<p><img src="img/geoide.png" width="30%" /></p>
+<hr />
+</div>
+<div id="elipsóide-de-revolução" class="section level3">
+<h3>Elipsóide de revolução</h3>
+<p>Ao girar em torno de seu eixo menor, uma ELIPSE forma um volume achatado nos pólos</p>
+<p>É a figura matemática que mais se aproxima da forma do geóide. Parâmetros são simples</p>
+<p>Parâmetros a = semi-eixo maior; b = semi-eixo menor; f = achatamento = (a-b)/a</p>
+<p>Em geral, cada país ou grupo de países adotou um elipsóide de referência para os trabalhos geodésicos e topográficos que mais se aproxima do geóide na região considerada.</p>
+<p><img src="img/elipsoi_1.png" width="30%" /></p>
+<p><img src="img/elipsoide_2.png" width="30%" /></p>
+<hr />
+</div>
+<div id="objetivos-dos-sistemas-geodésicos" class="section level3">
+<h3>Objetivos dos sistemas geodésicos</h3>
+<p>Permitem estabelecer uma relação entre um ponto determinado do terreno e um elipsóide de referência.<br />
+Elegem um elipsóide de revolução que melhor se ajuste às características locais do geóide.</p>
+<p>A posição deste elipsóide em relação à Terra, bem como sua forma e tamanho, constituem um conjunto de parâmetros que usualmente são denominados Datum Geodésico.</p>
+<hr />
+</div>
+</div>
+<div id="datum" class="section level2">
+<h2>Datum</h2>
+<p>O Datum é um marco geodésico, horizontal ou vertical, usado como ponto de origem do sistema geodésico (referência)</p>
+<ul>
+<li><p>Datum Vertical ou Altimétrico: referência para altitude (marco “zero” – 0 m)<br />
+<img src="img/datum.png" width="50%" /></p></li>
+<li><p>Datum Horizontal ou Planimétrico: referência para coordenadas planimétricas<br />
+<img src="img/geoide_geocentrico.png" width="30%" /></p></li>
+</ul>
+<p><img src="img/geoide_topocentrico.png" width="30%" /></p>
+<p>SIRGAS 2000 - Sistema de Referência Geocêntrico para as Américas<br />
+Datum Global, Geocêntrico</p>
+<p>SAD-69 - Sistema Geodésico Sul-Americano 1969<br />
+Datum Local, Topocêntrico</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aW-qbx04gS4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ecZIluGHOW4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xKGlMp__jog" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<hr />
+</div>
+<div id="sistemas-de-referências" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Sistemas de referências</h2>
+<p>Como estabelecer localizações na Superfície Terrestre?</p>
+<ul>
+<li><p>Adotar um modelo matemático da Terra: Datum Geodésico (SAD-69, SIRGAS 2000…)</p></li>
+<li><p>Adotar um sistema capaz de localizar qualquer lugar da Terra: Sistema de Coordenadas</p></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YW8lwn8L6rA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AcBlPMGwLdU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NhUgYgH53l0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div id="sistemas-de-coordenadas-geográficas" class="section level3 tabset tabset-fade tabset-pills">
+<h3>Sistemas de coordenadas geográficas</h3>
+<p>Sistemas de coordenadas geográficas são necessários para a expressão da posição de pontos sobre uma superfície.</p>
+<p>Considerando que esta superfície seja curvilínea (elipsóide ou esfera), cada ponto da superfície terrestre é localizado na interseção de um meridiano e paralelo e seu posicionamento é dado por meio de <strong>valores angulares</strong> que correspondem a sua <strong>latitude</strong> e <strong>longitude</strong>.</p>
+<p><img src="img/graus.png" width="30%" /></p>
+<div id="meridianos" class="section level4">
+<h4>Meridianos</h4>
+<ul>
+<li><p>Num modelo esférico, os meridianos são semi-círculos gerados a partir da interseção de planos verticais que contém o eixo de rotação terrestre com a superfície da Terra.</p></li>
+<li><p>Um semicírculo define um meridiano que com seu antimeridiano formam um círculo máximo.</p></li>
+<li><p>O meridiano de origem, é denominado Meridiano de Greenwich, com o seu antimeridiano, divide a Terra em dois hemisférios: leste e oeste.</p></li>
+<li><p>A leste deste meridiano, os valores da coordenadas são crescentes, variando entre 0° e +180°.</p></li>
+<li><p>A oeste, as medidas são decrescentes, variando entre 0° e -180°.</p></li>
+</ul>
+<hr />
+</div>
+<div id="paralelos" class="section level4">
+<h4>Paralelos</h4>
+<ul>
+<li><p>Paralelos são círculos cujo plano é perpendicular ao eixo dos pólos.</p></li>
+<li><p>O Equador é o paralelo que divide a Terra em dois hemisférios (Norte e Sul) e é considerado o paralelo de origem (0°).</p></li>
+<li><p>Partindo-se do Equador em direção aos pólos tem-se vários planos paralelos ao Equador, cujos tamanhos vão diminuindo até que se reduzam a pontos nos pólos Norte (+90°) e Sul (-90°).</p></li>
+</ul>
+<p><strong>Latitude e Longitude</strong><br />
+- Longitude (letra grega lambda λ): É a distância angular entre o lugar e o meridiano de origem, contada sobre um plano paralelo ao Equador.<br />
+- Latitude (letra grega phi ϕ): É a distância angular entre o lugar e o plano do Equador, contada sobre o plano do meridiano que passa no lugar.</p>
+<p><img src="img/lat_long.png" width="30%" /></p>
+<hr />
+</div>
+</div>
+<div id="sistemas-de-coordenadas-projetadas---projeções-cartográficas" class="section level3">
+<h3>Sistemas de coordenadas projetadas - projeções cartográficas</h3>
+<p>Para confeccionar um mapa, precisamos de um método segundo o qual a cada ponto da superfície terrestre corresponda um ponto do mapa e vice versa: <strong>sistema de projeções</strong>.</p>
+<p>A projeção cartográfica <strong>transforma</strong> uma posição sobre a superfície terrestre, identificada por latitude e longitude em uma posição em coordenadas cartesianas/planas (x,y).</p>
+<p><img src="img/projecao.png" width="30%" /></p>
+<p>Sistemas de coordenadas planas devem ser utilizados para representação de pequenas porções da superfície terrestre (mapas de grande escala). Coordenadas planas não são utilizadas para mapas de pequenas escalas pelo seu potencial de distorção.</p>
+<p><img src="img/laranja1.png" width="30%" /></p>
+<p><img src="img/laranja%202.png" width="30%" /></p>
+<p>Representar uma superfície curva (a Terra) em um plano sempre envolve deformações. <strong>Não existe projeção ideal</strong>.</p>
+<p><img src="img/erro_proj1.png" width="30%" /></p>
+<p><img src="img/proj.jpg" width="30%" /></p>
+<p>As projeções podem ser:<br />
+- Projeção conforme (conformidade): Mantêm ângulos (forma), mas não os tamanhos<br />
+- Projeção equidistante: Mantêm distância, mas deforma áreas e ângulos<br />
+- Projeção equivalente: Mantêm áreas, mas distorce as formas<br />
+- Projeções afiláticas: Não conserva nenhuma das propriedades. Busca reduzir distorções de maneira geral.</p>
+<p><strong>Classificação das projeções geográficas</strong><br />
+Quanto à Superfície de Projeção:<br />
+- Plana ou Azimutal<br />
+- Cilíndrica<br />
+- Cônica<br />
+- Polissuperficiais (poliédrica, policilíndrica, policônica)</p>
+<p>Quanto ao Tipo de Contato:<br />
+- Tangente</p>
+<p><img src="img/planotangente.png" width="30%" /></p>
+<ul>
+<li>Secante</li>
+</ul>
+<p><img src="img/planosecante.png" width="30%" /></p>
+<div id="utm" class="section level4">
+<h4>UTM</h4>
+<p>O Sistema de projeção Universal Transversa de Mercato apresenta uma superfície de Projeção com 60 cilindros transversos, cada um com uma amplitude de 6 graus em longitude = 60 fusos.</p>
+<p>Cada fuso possui um meridiano central, com 3 graus para cada lado. Os 60 fusos são enumerados a partir do anti-meridiano de Greenwich.</p>
+<p><img src="img/mercartor.png" width="30%" /></p>
+<p>A unidade é o <strong>metro</strong> tendo como origem o Equador e o Meridiano Central. No hemisfério Sul, o sistema possui o valor 10.000.000,00 m no Equador para a corrdenada Norte, decrescendo para o Sul. E o valor 500.000,00 m no Meridiano Central para a coordenada leste, decrescendo para Oeste e crescendo para leste.</p>
+<p>As Coordenadas UTM definem posições bi-dimensionais e horizontais.</p>
+<ul>
+<li><p>Fusos UTM no território brasileiro: Fusos 18 a 25</p></li>
+<li><p>Belo Horizonte: Fuso 23</p></li>
+</ul>
+<p><img src="img/utm.png" width="30%" /></p>
+<p><img src="img/utm_br.png" width="30%" /></p>
+<p><img src="img/utm1.png" width="30%" /></p>
+<p><img src="img/utm2.png" width="30%" /></p>
+<p><img src="img/utm5.png" width="30%" /></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="sistemas-de-informações-geográficas" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Sistemas de Informações Geográficas</h2>
+<p>GIS significa “Sistema de Informação Geográfica” ou “Geographic Information System”.</p>
+<p>Os GIS são um conjunto de ferramentas usadas para coleta e tratamento de informações espaciais, geração de saídas na forma de mapas, relatórios, arquivos digitais, etcc.</p>
+<ul>
+<li><p>Deve prover recursos para sua armazenagem, gerenciamento, manipulação e análise.</p></li>
+<li><p>Geoprocessamento representa qualquer tipo de processamento de dados georeferenciados (conceito muito mais abrangente).</p></li>
+<li><p>Um SIG é capaz de processar dados gráficos e não gráficos (alfanuméricos), com ferramentas de análises espaciais e modelagens de superfícies.</p></li>
+</ul>
+<p>Assim como usamos um processador de texto para escrever documentos e lidar com palavras em um computador, podemos usar um aplicativo GIS para lidar com informações espaciais em um computador.</p>
+<div id="definições-de-gis" class="section level3">
+<h3>Definições de GIS</h3>
+<p>“Conjunto poderoso de ferramentas para coletar, armazenar, recuperar, transformar e visualizar dados sobre o mundo real”(Burrough)</p>
+<p>“Um sistema de suporte à decisão que integra dados referenciados espacialmente num ambiente de respostas a problemas” (Cowen)</p>
+<p>“Um banco de dados indexados espacialmente, sobre o qual opera um conjunto de procedimentos para responder a consultas sobre entidades espaciais” (Smith)</p>
+<hr />
+</div>
+<div id="por-que-fazer-cartografia-digital" class="section level3">
+<h3>Por que fazer cartografia digital?</h3>
+<p>Fazer mapas mais rapidamente.<br />
+Fazer mapas mais baratos.<br />
+Fazer mapas para usos específicos.<br />
+Fazer mapas em situações em que não há disponibilidade de pessoal especializado.<br />
+Permitir experimentos com representações espaciais diversas dos mesmos dados.<br />
+Facilitar atualização de mapas.<br />
+Facilitar análises de dados que exigem interação entre estatística e mapas.<br />
+Minimizar a necessidade de mapas em papel.<br />
+Fazer mapas que não podem ser representados em papel, como em 3D, por exemplo.</p>
+<hr />
+</div>
+<div id="geocodificação" class="section level3">
+<h3>Geocodificação</h3>
+<p>A geocodificação é um processo que permite transformar dados de localização como coordenadas, endereços e nomes de estabelecimentos em uma geolocalização com latitude e longitude.</p>
+<hr />
+</div>
+<div id="unidades-espaciais-e-representação-de-fenômenos-espaciais" class="section level3">
+<h3>Unidades espaciais e representação de fenômenos espaciais</h3>
+<p>A escolha das unidades espaciais dependende tanto da disponibilidade de dados como do fenômeno em análise. Mais informações e discussões serão feitas sobre o conceito de MAUP.</p>
+<hr />
+</div>
+</div>
+<div id="dados-espaciais" class="section level2">
+<h2>Dados espaciais</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/crS7iLxq-ZM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>Dados espaciais podem apresentar diferentes formatos e comporem diferentes estruturas. Por agora, utilizaremos apenas o formato criado pela ESRI denominado <code>shapefile</code>.</p>
+<p><img src="img/vector-vs-raster.png" width="30%" /></p>
+<div id="estrutura-do-shapefile" class="section level3">
+<h3>Estrutura do shapefile</h3>
+<p><code>.dbf</code> – Banco de dados – Informações dos atributos das feições<br />
+<code>.prj</code> – Sistemas de coordenadas geográficas<br />
+<code>.snb</code> e <code>.sbx</code> – Armazenam os índices espaciais das feições<br />
+<code>.shp</code> – Armazenam a geometria das feições<br />
+<code>.shx</code> – Armazena o índice da geometria das feições – busca rápida<br />
+<code>.xml</code> - metadado em formato XML</p>
+<hr />
+</div>
+</div>
+<div id="distâncias" class="section level2">
+<h2>Distâncias</h2>
+<p>Diferentes conceitos de distância podem ser utilizados no tratamento de dados espaciais visando representar a impedância entre funções/atividades urbanas (conectividade).</p>
+<ul>
+<li>A <code>Distância Euclidiana</code> é definida como a soma da raiz quadrada da diferença entre x e y em suas respectivas dimensões.
+<ul>
+<li>Distância Euclideana: √((x1 – x2)² + (y1 – y2)²).</li>
+</ul></li>
+<li>A <code>Distância Manhattan</code> tem uma definição mais simples na qual é apenas a soma das diferenças entre x e y em cada dimensão.
+<ul>
+<li>Distância Manhattan: |x1 – x2| + |y1 – y2|.</li>
+</ul></li>
+</ul>
+<p>A <strong>Distância Euclidiana</strong> seria o segmento de uma reta que conceta dois pontos no espaço. A <strong>Distância Manhattan</strong> seria um segmento de retas na vertical e na horizontal semelhante a uma rota veicular em áreas urbanas.</p>
+<p>A distância em rede é aquela equivalente ao deslocamento real no ambiente construído e se aproxima mais da realidade. Entretanto, o esforço computacional e a demanda por dados é sempre maior.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Km9ZVmZsoDo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+</div>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+</a><br />Esta obra esta licenciada sob Licenca <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuicao-Compartilha Igual 4.0 Internacional</a>.
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

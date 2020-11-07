@@ -1,0 +1,50 @@
+output_dir: 'docs'
+navbar:
+  title: "Cursos 1/2020"
+  left:
+    - text: "Fundamentos do ERE"
+      href: index.html
+    - text: "GIS e Análise Espacial para Ciências Sociais"
+      menu: 
+        - text: "Introdução ao QGIS"  
+          href: gis.html
+        - text: "QGIS e GeoDa"
+          href: qgis.html
+        - text: "Verificação de aprendizagem"
+          href: verifica_qgis.html
+    - text: "R para Análise Espacial"
+      menu: 
+        - text: "Introdução ao R e RStudio"
+          href: r.html  
+        - text: "Estatística descritiva com o R"
+          href: r2.html  
+        - text: "Gráficos no R"
+          href: r3.html
+        - text: "Dados espaciais no R"
+          href: r4.html
+        - text: "Análise espacial no R"
+          href: r5.html
+        - text: "Medidas centrográficas"
+          href: r6.html
+        - text: "Dados matriciais no R"
+          href: r7.html
+        - text: "Dicas sobre R"
+          href: materialr.html
+    - text: "Gestão da Qualidade"
+      href: qualidade.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/retaoliveira/R
+output:
+  html_document:
+    self_contained: false
+    theme: flatly
+    highlight: textmate
+    mathjax: null
+    lib_dir: libs
+    css: styles.css
+    include:
+      in_header: head.html
+    toc_depth: 3
+    toc_float:
+      collapsed: true

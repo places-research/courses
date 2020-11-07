@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Gráficos no R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<script src="libs/ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77306155-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cursos 1/2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Fundamentos do ERE</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    GIS e Análise Espacial para Ciências Sociais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gis.html">Introdução ao QGIS</a>
+    </li>
+    <li>
+      <a href="qgis.html">QGIS e GeoDa</a>
+    </li>
+    <li>
+      <a href="verifica_qgis.html">Verificação de aprendizagem</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R para Análise Espacial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r.html">Introdução ao R e RStudio</a>
+    </li>
+    <li>
+      <a href="r2.html">Estatística descritiva com o R</a>
+    </li>
+    <li>
+      <a href="r3.html">Gráficos no R</a>
+    </li>
+    <li>
+      <a href="r4.html">Dados espaciais no R</a>
+    </li>
+    <li>
+      <a href="r5.html">Análise espacial no R</a>
+    </li>
+    <li>
+      <a href="r6.html">Medidas centrográficas</a>
+    </li>
+    <li>
+      <a href="materialr.html">Dicas sobre R</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="qualidade.html">Gestão da Qualidade</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/retaoliveira/R">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Gráficos no R</h1>
+<h4 class="date">Last updated: 07 novembro, 2020</h4>
+
+</div>
+
+
+<div id="gráficos-no-r" class="section level2">
+<h2>Gráficos no R</h2>
+<div id="ferramentas-básicas-de-construção-de-gráficos-no-r" class="section level3">
+<h3>Ferramentas básicas de construção de gráficos no R</h3>
+<pre class="r"><code>x1 &lt;- rnorm(100)
+y1 &lt;- rnorm(100)
+plot(x1,y1)</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>plot(x1,y1,pch=16, col=&#39;red&#39;)</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>x2 &lt;- seq(0,2*pi,len=100)
+y2 &lt;- sin(x2)
+
+plot(x2,y2,type=&#39;l&#39;)</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>plot(x2,y2,type=&#39;l&#39;, lwd=3, col=&#39;darkgreen&#39;) </code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>plot(x2,y2,type=&#39;l&#39;, col=&#39;darkgreen&#39;, lwd=3, ylim=c(-1.2,1.2));
+y2r &lt;- y2 + rnorm(100,0,0.1)
+points(x2,y2r, pch=16, col=&#39;darkred&#39;)</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<div id="carregando-mapas-no-r" class="section level4">
+<h4>Carregando mapas no R</h4>
+<pre class="r"><code>#install.packages(&quot;GISTools&quot;, depend = T)
+library(GISTools)
+
+# library(GISTools)
+data(georgia)
+
+# seleciona o primeiro elemento - Município Appling
+appling &lt;- georgia.polys[[1]]
+
+# determinar a extensão da representação
+plot(appling, asp=1, type=&#39;n&#39;, xlab=&quot;Easting&quot;, ylab=&quot;Northing&quot;)
+
+# plot the selected features with hatching
+polygon(appling, density=14, angle=135) </code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="cores-nos-gráficos" class="section level4">
+<h4>Cores nos gráficos</h4>
+<pre class="r"><code>colours()</code></pre>
+<pre><code>##   [1] &quot;white&quot;                &quot;aliceblue&quot;            &quot;antiquewhite&quot;         &quot;antiquewhite1&quot;        &quot;antiquewhite2&quot;       
+##   [6] &quot;antiquewhite3&quot;        &quot;antiquewhite4&quot;        &quot;aquamarine&quot;           &quot;aquamarine1&quot;          &quot;aquamarine2&quot;         
+##  [11] &quot;aquamarine3&quot;          &quot;aquamarine4&quot;          &quot;azure&quot;                &quot;azure1&quot;               &quot;azure2&quot;              
+##  [16] &quot;azure3&quot;               &quot;azure4&quot;               &quot;beige&quot;                &quot;bisque&quot;               &quot;bisque1&quot;             
+##  [21] &quot;bisque2&quot;              &quot;bisque3&quot;              &quot;bisque4&quot;              &quot;black&quot;                &quot;blanchedalmond&quot;      
+##  [26] &quot;blue&quot;                 &quot;blue1&quot;                &quot;blue2&quot;                &quot;blue3&quot;                &quot;blue4&quot;               
+##  [31] &quot;blueviolet&quot;           &quot;brown&quot;                &quot;brown1&quot;               &quot;brown2&quot;               &quot;brown3&quot;              
+##  [36] &quot;brown4&quot;               &quot;burlywood&quot;            &quot;burlywood1&quot;           &quot;burlywood2&quot;           &quot;burlywood3&quot;          
+##  [41] &quot;burlywood4&quot;           &quot;cadetblue&quot;            &quot;cadetblue1&quot;           &quot;cadetblue2&quot;           &quot;cadetblue3&quot;          
+##  [46] &quot;cadetblue4&quot;           &quot;chartreuse&quot;           &quot;chartreuse1&quot;          &quot;chartreuse2&quot;          &quot;chartreuse3&quot;         
+##  [51] &quot;chartreuse4&quot;          &quot;chocolate&quot;            &quot;chocolate1&quot;           &quot;chocolate2&quot;           &quot;chocolate3&quot;          
+##  [56] &quot;chocolate4&quot;           &quot;coral&quot;                &quot;coral1&quot;               &quot;coral2&quot;               &quot;coral3&quot;              
+##  [61] &quot;coral4&quot;               &quot;cornflowerblue&quot;       &quot;cornsilk&quot;             &quot;cornsilk1&quot;            &quot;cornsilk2&quot;           
+##  [66] &quot;cornsilk3&quot;            &quot;cornsilk4&quot;            &quot;cyan&quot;                 &quot;cyan1&quot;                &quot;cyan2&quot;               
+##  [71] &quot;cyan3&quot;                &quot;cyan4&quot;                &quot;darkblue&quot;             &quot;darkcyan&quot;             &quot;darkgoldenrod&quot;       
+##  [76] &quot;darkgoldenrod1&quot;       &quot;darkgoldenrod2&quot;       &quot;darkgoldenrod3&quot;       &quot;darkgoldenrod4&quot;       &quot;darkgray&quot;            
+##  [81] &quot;darkgreen&quot;            &quot;darkgrey&quot;             &quot;darkkhaki&quot;            &quot;darkmagenta&quot;          &quot;darkolivegreen&quot;      
+##  [86] &quot;darkolivegreen1&quot;      &quot;darkolivegreen2&quot;      &quot;darkolivegreen3&quot;      &quot;darkolivegreen4&quot;      &quot;darkorange&quot;          
+##  [91] &quot;darkorange1&quot;          &quot;darkorange2&quot;          &quot;darkorange3&quot;          &quot;darkorange4&quot;          &quot;darkorchid&quot;          
+##  [96] &quot;darkorchid1&quot;          &quot;darkorchid2&quot;          &quot;darkorchid3&quot;          &quot;darkorchid4&quot;          &quot;darkred&quot;             
+## [101] &quot;darksalmon&quot;           &quot;darkseagreen&quot;         &quot;darkseagreen1&quot;        &quot;darkseagreen2&quot;        &quot;darkseagreen3&quot;       
+## [106] &quot;darkseagreen4&quot;        &quot;darkslateblue&quot;        &quot;darkslategray&quot;        &quot;darkslategray1&quot;       &quot;darkslategray2&quot;      
+## [111] &quot;darkslategray3&quot;       &quot;darkslategray4&quot;       &quot;darkslategrey&quot;        &quot;darkturquoise&quot;        &quot;darkviolet&quot;          
+## [116] &quot;deeppink&quot;             &quot;deeppink1&quot;            &quot;deeppink2&quot;            &quot;deeppink3&quot;            &quot;deeppink4&quot;           
+## [121] &quot;deepskyblue&quot;          &quot;deepskyblue1&quot;         &quot;deepskyblue2&quot;         &quot;deepskyblue3&quot;         &quot;deepskyblue4&quot;        
+## [126] &quot;dimgray&quot;              &quot;dimgrey&quot;              &quot;dodgerblue&quot;           &quot;dodgerblue1&quot;          &quot;dodgerblue2&quot;         
+## [131] &quot;dodgerblue3&quot;          &quot;dodgerblue4&quot;          &quot;firebrick&quot;            &quot;firebrick1&quot;           &quot;firebrick2&quot;          
+## [136] &quot;firebrick3&quot;           &quot;firebrick4&quot;           &quot;floralwhite&quot;          &quot;forestgreen&quot;          &quot;gainsboro&quot;           
+## [141] &quot;ghostwhite&quot;           &quot;gold&quot;                 &quot;gold1&quot;                &quot;gold2&quot;                &quot;gold3&quot;               
+## [146] &quot;gold4&quot;                &quot;goldenrod&quot;            &quot;goldenrod1&quot;           &quot;goldenrod2&quot;           &quot;goldenrod3&quot;          
+## [151] &quot;goldenrod4&quot;           &quot;gray&quot;                 &quot;gray0&quot;                &quot;gray1&quot;                &quot;gray2&quot;               
+## [156] &quot;gray3&quot;                &quot;gray4&quot;                &quot;gray5&quot;                &quot;gray6&quot;                &quot;gray7&quot;               
+## [161] &quot;gray8&quot;                &quot;gray9&quot;                &quot;gray10&quot;               &quot;gray11&quot;               &quot;gray12&quot;              
+## [166] &quot;gray13&quot;               &quot;gray14&quot;               &quot;gray15&quot;               &quot;gray16&quot;               &quot;gray17&quot;              
+## [171] &quot;gray18&quot;               &quot;gray19&quot;               &quot;gray20&quot;               &quot;gray21&quot;               &quot;gray22&quot;              
+## [176] &quot;gray23&quot;               &quot;gray24&quot;               &quot;gray25&quot;               &quot;gray26&quot;               &quot;gray27&quot;              
+## [181] &quot;gray28&quot;               &quot;gray29&quot;               &quot;gray30&quot;               &quot;gray31&quot;               &quot;gray32&quot;              
+## [186] &quot;gray33&quot;               &quot;gray34&quot;               &quot;gray35&quot;               &quot;gray36&quot;               &quot;gray37&quot;              
+## [191] &quot;gray38&quot;               &quot;gray39&quot;               &quot;gray40&quot;               &quot;gray41&quot;               &quot;gray42&quot;              
+## [196] &quot;gray43&quot;               &quot;gray44&quot;               &quot;gray45&quot;               &quot;gray46&quot;               &quot;gray47&quot;              
+## [201] &quot;gray48&quot;               &quot;gray49&quot;               &quot;gray50&quot;               &quot;gray51&quot;               &quot;gray52&quot;              
+## [206] &quot;gray53&quot;               &quot;gray54&quot;               &quot;gray55&quot;               &quot;gray56&quot;               &quot;gray57&quot;              
+## [211] &quot;gray58&quot;               &quot;gray59&quot;               &quot;gray60&quot;               &quot;gray61&quot;               &quot;gray62&quot;              
+## [216] &quot;gray63&quot;               &quot;gray64&quot;               &quot;gray65&quot;               &quot;gray66&quot;               &quot;gray67&quot;              
+## [221] &quot;gray68&quot;               &quot;gray69&quot;               &quot;gray70&quot;               &quot;gray71&quot;               &quot;gray72&quot;              
+## [226] &quot;gray73&quot;               &quot;gray74&quot;               &quot;gray75&quot;               &quot;gray76&quot;               &quot;gray77&quot;              
+## [231] &quot;gray78&quot;               &quot;gray79&quot;               &quot;gray80&quot;               &quot;gray81&quot;               &quot;gray82&quot;              
+## [236] &quot;gray83&quot;               &quot;gray84&quot;               &quot;gray85&quot;               &quot;gray86&quot;               &quot;gray87&quot;              
+## [241] &quot;gray88&quot;               &quot;gray89&quot;               &quot;gray90&quot;               &quot;gray91&quot;               &quot;gray92&quot;              
+## [246] &quot;gray93&quot;               &quot;gray94&quot;               &quot;gray95&quot;               &quot;gray96&quot;               &quot;gray97&quot;              
+## [251] &quot;gray98&quot;               &quot;gray99&quot;               &quot;gray100&quot;              &quot;green&quot;                &quot;green1&quot;              
+## [256] &quot;green2&quot;               &quot;green3&quot;               &quot;green4&quot;               &quot;greenyellow&quot;          &quot;grey&quot;                
+## [261] &quot;grey0&quot;                &quot;grey1&quot;                &quot;grey2&quot;                &quot;grey3&quot;                &quot;grey4&quot;               
+## [266] &quot;grey5&quot;                &quot;grey6&quot;                &quot;grey7&quot;                &quot;grey8&quot;                &quot;grey9&quot;               
+## [271] &quot;grey10&quot;               &quot;grey11&quot;               &quot;grey12&quot;               &quot;grey13&quot;               &quot;grey14&quot;              
+## [276] &quot;grey15&quot;               &quot;grey16&quot;               &quot;grey17&quot;               &quot;grey18&quot;               &quot;grey19&quot;              
+## [281] &quot;grey20&quot;               &quot;grey21&quot;               &quot;grey22&quot;               &quot;grey23&quot;               &quot;grey24&quot;              
+## [286] &quot;grey25&quot;               &quot;grey26&quot;               &quot;grey27&quot;               &quot;grey28&quot;               &quot;grey29&quot;              
+## [291] &quot;grey30&quot;               &quot;grey31&quot;               &quot;grey32&quot;               &quot;grey33&quot;               &quot;grey34&quot;              
+## [296] &quot;grey35&quot;               &quot;grey36&quot;               &quot;grey37&quot;               &quot;grey38&quot;               &quot;grey39&quot;              
+## [301] &quot;grey40&quot;               &quot;grey41&quot;               &quot;grey42&quot;               &quot;grey43&quot;               &quot;grey44&quot;              
+## [306] &quot;grey45&quot;               &quot;grey46&quot;               &quot;grey47&quot;               &quot;grey48&quot;               &quot;grey49&quot;              
+## [311] &quot;grey50&quot;               &quot;grey51&quot;               &quot;grey52&quot;               &quot;grey53&quot;               &quot;grey54&quot;              
+## [316] &quot;grey55&quot;               &quot;grey56&quot;               &quot;grey57&quot;               &quot;grey58&quot;               &quot;grey59&quot;              
+## [321] &quot;grey60&quot;               &quot;grey61&quot;               &quot;grey62&quot;               &quot;grey63&quot;               &quot;grey64&quot;              
+## [326] &quot;grey65&quot;               &quot;grey66&quot;               &quot;grey67&quot;               &quot;grey68&quot;               &quot;grey69&quot;              
+## [331] &quot;grey70&quot;               &quot;grey71&quot;               &quot;grey72&quot;               &quot;grey73&quot;               &quot;grey74&quot;              
+## [336] &quot;grey75&quot;               &quot;grey76&quot;               &quot;grey77&quot;               &quot;grey78&quot;               &quot;grey79&quot;              
+## [341] &quot;grey80&quot;               &quot;grey81&quot;               &quot;grey82&quot;               &quot;grey83&quot;               &quot;grey84&quot;              
+## [346] &quot;grey85&quot;               &quot;grey86&quot;               &quot;grey87&quot;               &quot;grey88&quot;               &quot;grey89&quot;              
+## [351] &quot;grey90&quot;               &quot;grey91&quot;               &quot;grey92&quot;               &quot;grey93&quot;               &quot;grey94&quot;              
+## [356] &quot;grey95&quot;               &quot;grey96&quot;               &quot;grey97&quot;               &quot;grey98&quot;               &quot;grey99&quot;              
+## [361] &quot;grey100&quot;              &quot;honeydew&quot;             &quot;honeydew1&quot;            &quot;honeydew2&quot;            &quot;honeydew3&quot;           
+## [366] &quot;honeydew4&quot;            &quot;hotpink&quot;              &quot;hotpink1&quot;             &quot;hotpink2&quot;             &quot;hotpink3&quot;            
+## [371] &quot;hotpink4&quot;             &quot;indianred&quot;            &quot;indianred1&quot;           &quot;indianred2&quot;           &quot;indianred3&quot;          
+## [376] &quot;indianred4&quot;           &quot;ivory&quot;                &quot;ivory1&quot;               &quot;ivory2&quot;               &quot;ivory3&quot;              
+## [381] &quot;ivory4&quot;               &quot;khaki&quot;                &quot;khaki1&quot;               &quot;khaki2&quot;               &quot;khaki3&quot;              
+## [386] &quot;khaki4&quot;               &quot;lavender&quot;             &quot;lavenderblush&quot;        &quot;lavenderblush1&quot;       &quot;lavenderblush2&quot;      
+## [391] &quot;lavenderblush3&quot;       &quot;lavenderblush4&quot;       &quot;lawngreen&quot;            &quot;lemonchiffon&quot;         &quot;lemonchiffon1&quot;       
+## [396] &quot;lemonchiffon2&quot;        &quot;lemonchiffon3&quot;        &quot;lemonchiffon4&quot;        &quot;lightblue&quot;            &quot;lightblue1&quot;          
+## [401] &quot;lightblue2&quot;           &quot;lightblue3&quot;           &quot;lightblue4&quot;           &quot;lightcoral&quot;           &quot;lightcyan&quot;           
+## [406] &quot;lightcyan1&quot;           &quot;lightcyan2&quot;           &quot;lightcyan3&quot;           &quot;lightcyan4&quot;           &quot;lightgoldenrod&quot;      
+## [411] &quot;lightgoldenrod1&quot;      &quot;lightgoldenrod2&quot;      &quot;lightgoldenrod3&quot;      &quot;lightgoldenrod4&quot;      &quot;lightgoldenrodyellow&quot;
+## [416] &quot;lightgray&quot;            &quot;lightgreen&quot;           &quot;lightgrey&quot;            &quot;lightpink&quot;            &quot;lightpink1&quot;          
+## [421] &quot;lightpink2&quot;           &quot;lightpink3&quot;           &quot;lightpink4&quot;           &quot;lightsalmon&quot;          &quot;lightsalmon1&quot;        
+## [426] &quot;lightsalmon2&quot;         &quot;lightsalmon3&quot;         &quot;lightsalmon4&quot;         &quot;lightseagreen&quot;        &quot;lightskyblue&quot;        
+## [431] &quot;lightskyblue1&quot;        &quot;lightskyblue2&quot;        &quot;lightskyblue3&quot;        &quot;lightskyblue4&quot;        &quot;lightslateblue&quot;      
+## [436] &quot;lightslategray&quot;       &quot;lightslategrey&quot;       &quot;lightsteelblue&quot;       &quot;lightsteelblue1&quot;      &quot;lightsteelblue2&quot;     
+## [441] &quot;lightsteelblue3&quot;      &quot;lightsteelblue4&quot;      &quot;lightyellow&quot;          &quot;lightyellow1&quot;         &quot;lightyellow2&quot;        
+## [446] &quot;lightyellow3&quot;         &quot;lightyellow4&quot;         &quot;limegreen&quot;            &quot;linen&quot;                &quot;magenta&quot;             
+## [451] &quot;magenta1&quot;             &quot;magenta2&quot;             &quot;magenta3&quot;             &quot;magenta4&quot;             &quot;maroon&quot;              
+## [456] &quot;maroon1&quot;              &quot;maroon2&quot;              &quot;maroon3&quot;              &quot;maroon4&quot;              &quot;mediumaquamarine&quot;    
+## [461] &quot;mediumblue&quot;           &quot;mediumorchid&quot;         &quot;mediumorchid1&quot;        &quot;mediumorchid2&quot;        &quot;mediumorchid3&quot;       
+## [466] &quot;mediumorchid4&quot;        &quot;mediumpurple&quot;         &quot;mediumpurple1&quot;        &quot;mediumpurple2&quot;        &quot;mediumpurple3&quot;       
+## [471] &quot;mediumpurple4&quot;        &quot;mediumseagreen&quot;       &quot;mediumslateblue&quot;      &quot;mediumspringgreen&quot;    &quot;mediumturquoise&quot;     
+## [476] &quot;mediumvioletred&quot;      &quot;midnightblue&quot;         &quot;mintcream&quot;            &quot;mistyrose&quot;            &quot;mistyrose1&quot;          
+## [481] &quot;mistyrose2&quot;           &quot;mistyrose3&quot;           &quot;mistyrose4&quot;           &quot;moccasin&quot;             &quot;navajowhite&quot;         
+## [486] &quot;navajowhite1&quot;         &quot;navajowhite2&quot;         &quot;navajowhite3&quot;         &quot;navajowhite4&quot;         &quot;navy&quot;                
+## [491] &quot;navyblue&quot;             &quot;oldlace&quot;              &quot;olivedrab&quot;            &quot;olivedrab1&quot;           &quot;olivedrab2&quot;          
+## [496] &quot;olivedrab3&quot;           &quot;olivedrab4&quot;           &quot;orange&quot;               &quot;orange1&quot;              &quot;orange2&quot;             
+## [501] &quot;orange3&quot;              &quot;orange4&quot;              &quot;orangered&quot;            &quot;orangered1&quot;           &quot;orangered2&quot;          
+## [506] &quot;orangered3&quot;           &quot;orangered4&quot;           &quot;orchid&quot;               &quot;orchid1&quot;              &quot;orchid2&quot;             
+## [511] &quot;orchid3&quot;              &quot;orchid4&quot;              &quot;palegoldenrod&quot;        &quot;palegreen&quot;            &quot;palegreen1&quot;          
+## [516] &quot;palegreen2&quot;           &quot;palegreen3&quot;           &quot;palegreen4&quot;           &quot;paleturquoise&quot;        &quot;paleturquoise1&quot;      
+## [521] &quot;paleturquoise2&quot;       &quot;paleturquoise3&quot;       &quot;paleturquoise4&quot;       &quot;palevioletred&quot;        &quot;palevioletred1&quot;      
+## [526] &quot;palevioletred2&quot;       &quot;palevioletred3&quot;       &quot;palevioletred4&quot;       &quot;papayawhip&quot;           &quot;peachpuff&quot;           
+## [531] &quot;peachpuff1&quot;           &quot;peachpuff2&quot;           &quot;peachpuff3&quot;           &quot;peachpuff4&quot;           &quot;peru&quot;                
+## [536] &quot;pink&quot;                 &quot;pink1&quot;                &quot;pink2&quot;                &quot;pink3&quot;                &quot;pink4&quot;               
+## [541] &quot;plum&quot;                 &quot;plum1&quot;                &quot;plum2&quot;                &quot;plum3&quot;                &quot;plum4&quot;               
+## [546] &quot;powderblue&quot;           &quot;purple&quot;               &quot;purple1&quot;              &quot;purple2&quot;              &quot;purple3&quot;             
+## [551] &quot;purple4&quot;              &quot;red&quot;                  &quot;red1&quot;                 &quot;red2&quot;                 &quot;red3&quot;                
+## [556] &quot;red4&quot;                 &quot;rosybrown&quot;            &quot;rosybrown1&quot;           &quot;rosybrown2&quot;           &quot;rosybrown3&quot;          
+## [561] &quot;rosybrown4&quot;           &quot;royalblue&quot;            &quot;royalblue1&quot;           &quot;royalblue2&quot;           &quot;royalblue3&quot;          
+## [566] &quot;royalblue4&quot;           &quot;saddlebrown&quot;          &quot;salmon&quot;               &quot;salmon1&quot;              &quot;salmon2&quot;             
+## [571] &quot;salmon3&quot;              &quot;salmon4&quot;              &quot;sandybrown&quot;           &quot;seagreen&quot;             &quot;seagreen1&quot;           
+## [576] &quot;seagreen2&quot;            &quot;seagreen3&quot;            &quot;seagreen4&quot;            &quot;seashell&quot;             &quot;seashell1&quot;           
+## [581] &quot;seashell2&quot;            &quot;seashell3&quot;            &quot;seashell4&quot;            &quot;sienna&quot;               &quot;sienna1&quot;             
+## [586] &quot;sienna2&quot;              &quot;sienna3&quot;              &quot;sienna4&quot;              &quot;skyblue&quot;              &quot;skyblue1&quot;            
+## [591] &quot;skyblue2&quot;             &quot;skyblue3&quot;             &quot;skyblue4&quot;             &quot;slateblue&quot;            &quot;slateblue1&quot;          
+## [596] &quot;slateblue2&quot;           &quot;slateblue3&quot;           &quot;slateblue4&quot;           &quot;slategray&quot;            &quot;slategray1&quot;          
+## [601] &quot;slategray2&quot;           &quot;slategray3&quot;           &quot;slategray4&quot;           &quot;slategrey&quot;            &quot;snow&quot;                
+## [606] &quot;snow1&quot;                &quot;snow2&quot;                &quot;snow3&quot;                &quot;snow4&quot;                &quot;springgreen&quot;         
+## [611] &quot;springgreen1&quot;         &quot;springgreen2&quot;         &quot;springgreen3&quot;         &quot;springgreen4&quot;         &quot;steelblue&quot;           
+## [616] &quot;steelblue1&quot;           &quot;steelblue2&quot;           &quot;steelblue3&quot;           &quot;steelblue4&quot;           &quot;tan&quot;                 
+## [621] &quot;tan1&quot;                 &quot;tan2&quot;                 &quot;tan3&quot;                 &quot;tan4&quot;                 &quot;thistle&quot;             
+## [626] &quot;thistle1&quot;             &quot;thistle2&quot;             &quot;thistle3&quot;             &quot;thistle4&quot;             &quot;tomato&quot;              
+## [631] &quot;tomato1&quot;              &quot;tomato2&quot;              &quot;tomato3&quot;              &quot;tomato4&quot;              &quot;turquoise&quot;           
+## [636] &quot;turquoise1&quot;           &quot;turquoise2&quot;           &quot;turquoise3&quot;           &quot;turquoise4&quot;           &quot;violet&quot;              
+## [641] &quot;violetred&quot;            &quot;violetred1&quot;           &quot;violetred2&quot;           &quot;violetred3&quot;           &quot;violetred4&quot;          
+## [646] &quot;wheat&quot;                &quot;wheat1&quot;               &quot;wheat2&quot;               &quot;wheat3&quot;               &quot;wheat4&quot;              
+## [651] &quot;whitesmoke&quot;           &quot;yellow&quot;               &quot;yellow1&quot;              &quot;yellow2&quot;              &quot;yellow3&quot;             
+## [656] &quot;yellow4&quot;              &quot;yellowgreen&quot;</code></pre>
+<pre class="r"><code>plot(appling, asp=1, type=&#39;n&#39;, xlab=&quot;Easting&quot;, ylab=&quot;Northing&quot;)
+polygon(appling, col=rgb(0,0.5,0.7))</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code># set the plot extent
+plot(appling, asp=1, type=&#39;n&#39;, xlab=&quot;Easting&quot;, ylab=&quot;Northing&quot;)
+# plot the points
+points(x = runif(500,126,132)*10000, 
+    y = runif(500,103,108)*10000, pch=16, col=&#39;red&#39;) 
+# plot the polygon with a transparency factor
+polygon(appling, col=rgb(0,0.5,0.7,0.4))</code></pre>
+<p><img src="r3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="introdução-ao-ggplot" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Introdução ao <code>ggplot</code></h2>
+<div id="sintaxe-básica" class="section level3">
+<h3>Sintaxe básica</h3>
+<p>A sintaxe do package <code>ggplot</code> é estruturada por meio da chamada dos dados e complementada pela <em>aesthetic</em> (propriedades do gráfico que vão representar certos elementos dos dados) e por funções que chamam diferentes tipos de gráficos.</p>
+<p>
+<hr>
+<p>
+</div>
+<div id="tipos-de-gráficos-com-duas-dimensões" class="section level3">
+<h3>Tipos de gráficos com duas dimensões</h3>
+<p>Gráficos com duas dimensões requerem <em>aesthetics</em> <code>x</code> e <code>y</code>. Todos esses tipos de gráficos possibilitam o uso de outras <em>aesthetics</em> como <code>color</code>, <code>size</code> e <code>fill</code>.</p>
+<p>Algumas <em>aesthetics</em> básicas são:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>posição no eixo-x</td>
+</tr>
+<tr class="even">
+<td>y</td>
+<td>posição no eixo-y</td>
+</tr>
+<tr class="odd">
+<td>shape</td>
+<td>forma</td>
+</tr>
+<tr class="even">
+<td>color</td>
+<td>cor da borda dos elementos</td>
+</tr>
+<tr class="odd">
+<td>fill</td>
+<td>cor de preenchimento dos elementos</td>
+</tr>
+<tr class="even">
+<td>size</td>
+<td>tamanho</td>
+</tr>
+<tr class="odd">
+<td>alpha</td>
+<td>transparência (1:opaco; 0:transparente)</td>
+</tr>
+<tr class="even">
+<td>linetype</td>
+<td>tipo de linha (solid; dashed)</td>
+</tr>
+</tbody>
+</table>
+<p>
+<hr>
+<p>
+</div>
+</div>
+<div id="verificação-de-aprendizagem" class="section level2">
+<h2>Verificação de aprendizagem</h2>
+<p><strong>Questão 1:</strong> Abra o <code>data.frame</code> “iris”.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Faça um gráfico de dispersão considerando duas variáveis desse data.frame. Copie e cole no Canvas (código e resultado).</li>
+</ol>
+</div>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+</a><br />Esta obra esta licenciada sob Licenca <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuicao-Compartilha Igual 4.0 Internacional</a>.
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

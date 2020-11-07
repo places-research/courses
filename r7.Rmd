@@ -1,0 +1,63 @@
+---
+title: "Tratamento de informações de dados espaciais matriciais"
+date: "Last updated: `r format(Sys.time(), '%d %B, %Y')`"
+    
+output:
+  html_document:
+    toc_depth: 3
+    include:
+      in_header: head.html
+      after_body: footer.html
+    theme: flatly
+    highlight: textmate
+    mathjax: null
+    lib_dir: libs
+    css: styles.css
+    logo: logo.jpg
+    toc_float:
+      collapsed: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# DADOS MATRICIAIS
+
+Dados matriciais ou `raster` são informações em estrutura matricial georreferenciadas. O package `raster` permite a manipulação de dados matriciais de maneira simples e objetiva. 
+
+Algumas das funções iniciais são:
+
+Função | uso
+-------|----
+`stack()` | tratamento de imagens multibanda
+`brick()` | tratamento de imagens multibanda
+`res()`| obtenção da resolução (tamanho das células)
+`dim()` | dimensões - número de linhas, colunas e bandas
+`xmin()`, `xmax()`, `ymin()`, `ymax()` | coordenadas extremas
+`extent()`| permite a criação do tamanho da extensão, ou seja, determinar as coordenadas extremas na sequência - c(xmin,xmax,ymin,ymax)
+`cellStats()` | calcular índice sobre o conjunto da imagem
+
+```{r}
+library(raster)
+```
+
+## Gerar os dados matriciais para entendimento das operações
+
+```{r echo=TRUE, warning=FALSE}
+m1 <- matrix(c(3,1,2,2,1,1,2,2,1,1,3,3),ncol=4,nrow=3,byrow=TRUE)
+print(m1)
+
+m2 <- matrix(c(1,2,3,4,2,NA,2,2,3,4,3,1),ncol=4,nrow=3,byrow=TRUE)
+print(m2)
+```
+## Transformar em raster
+```{r echo=TRUE, warning=FALSE}
+r1 <- raster(m1)
+r2 <- raster(m2)
+extent(r1) <- extent(r2) <- extent(c(0,4,0,3))
+```
+
+
+
+

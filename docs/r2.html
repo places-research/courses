@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Estatística Descritiva com o R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<script src="libs/ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77306155-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cursos 1/2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Fundamentos do ERE</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    GIS e Análise Espacial para Ciências Sociais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gis.html">Introdução ao QGIS</a>
+    </li>
+    <li>
+      <a href="qgis.html">QGIS e GeoDa</a>
+    </li>
+    <li>
+      <a href="verifica_qgis.html">Verificação de aprendizagem</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R para Análise Espacial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r.html">Introdução ao R e RStudio</a>
+    </li>
+    <li>
+      <a href="r2.html">Estatística descritiva com o R</a>
+    </li>
+    <li>
+      <a href="r3.html">Gráficos no R</a>
+    </li>
+    <li>
+      <a href="r4.html">Dados espaciais no R</a>
+    </li>
+    <li>
+      <a href="r5.html">Análise espacial no R</a>
+    </li>
+    <li>
+      <a href="r6.html">Medidas centrográficas</a>
+    </li>
+    <li>
+      <a href="materialr.html">Dicas sobre R</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="qualidade.html">Gestão da Qualidade</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/retaoliveira/R">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Estatística Descritiva com o R</h1>
+<h4 class="date">Last updated: 07 novembro, 2020</h4>
+
+</div>
+
+
+<div id="estatística-descritiva-para-sumarização-de-dados-com-o-r" class="section level2">
+<h2>Estatística descritiva para sumarização de dados com o R</h2>
+<div id="operadores-aritméticos-r" class="section level3">
+<h3>Operadores aritméticos R</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x + y</td>
+<td>Adição de x com y</td>
+</tr>
+<tr class="even">
+<td>x - y</td>
+<td>Subtração de y em x</td>
+</tr>
+<tr class="odd">
+<td>x * y</td>
+<td>Multiplicação de x e y</td>
+</tr>
+<tr class="even">
+<td>x / y</td>
+<td>Divisão de x por y</td>
+</tr>
+<tr class="odd">
+<td>xy ou x**y</td>
+<td>x elevado a y-ésima potência</td>
+</tr>
+<tr class="even">
+<td>x%%y</td>
+<td>Resto da divisão de x por y (módulo)</td>
+</tr>
+<tr class="odd">
+<td>x%/%y</td>
+<td>Parte inteira da divisão de x por y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="operadores-de-comparação-no-r" class="section level3">
+<h3>Operadores de comparação no R</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>igual a</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>diferente de</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>maior que</td>
+</tr>
+<tr class="even">
+<td>&lt;</td>
+<td>menor que</td>
+</tr>
+<tr class="odd">
+<td>&gt;=</td>
+<td>maior ou igual a</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>menor ou igual a</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Os operadores de comparação sempre retornam um valor lógico TRUE ou FALSE.</p>
+</blockquote>
+</div>
+<div id="operadores-lógicos-no-r" class="section level3">
+<h3>Operadores lógicos no R</h3>
+<table style="width:100%;">
+<colgroup>
+<col width="29%" />
+<col width="33%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Descrição</th>
+<th>Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&amp;</td>
+<td>AND lógico</td>
+<td>Versão vetorizada. Compara dois elementos do tipo vetor e retorna um vetor de TRUEs e FALSEs</td>
+</tr>
+<tr class="even">
+<td>&amp;&amp;</td>
+<td>AND lógico</td>
+<td>Versão não-vetorizada. Compara apenas o primeiro valor de cada vetor, retornando um valor lógico.</td>
+</tr>
+<tr class="odd">
+<td>|</td>
+<td>OR lógico</td>
+<td>Versão vetorizada. Compara dois elementos do tipo vetor e retorna um vetor de TRUEs e FALSEs</td>
+</tr>
+<tr class="even">
+<td>||</td>
+<td>OR lógico</td>
+<td>Versão não-vetorizada. Compara apenas o primeiro valor de cada vetor, retornando um valor lógico.</td>
+</tr>
+<tr class="odd">
+<td>!</td>
+<td>NOT lógico</td>
+<td>Negação lógica. Retorna um valor lógico único ou um vetor de TRUE / FALSE.</td>
+</tr>
+<tr class="even">
+<td>xor</td>
+<td>XOR</td>
+<td>Ou Exclusivo. Retorna valor lógico TRUE se ambos os valores de entrada forem diferentes entre si, e retorna FALSE se os valores forem iguais.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Também conhecidos como operadores booleanos, permitem trabalhar com múltiplas condições relacionais na mesma expressão, e retornam valores lógicos verdadeiro ou falso.</p>
+</blockquote>
+</div>
+<div id="algumas-funções-estatísticas-para-sumarização-de-dados" class="section level3">
+<h3>Algumas funções estatísticas para sumarização de dados</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Funções</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>min()</code></td>
+<td>mínimo</td>
+</tr>
+<tr class="even">
+<td><code>max()</code></td>
+<td>máximo</td>
+</tr>
+<tr class="odd">
+<td><code>range()</code></td>
+<td>amplitude</td>
+</tr>
+<tr class="even">
+<td><code>mean()</code></td>
+<td>média</td>
+</tr>
+<tr class="odd">
+<td><code>sum()</code></td>
+<td>soma</td>
+</tr>
+<tr class="even">
+<td><code>median()</code></td>
+<td>mediana</td>
+</tr>
+<tr class="odd">
+<td><code>sd()</code></td>
+<td>desvio-padrão</td>
+</tr>
+<tr class="even">
+<td><code>IQR()</code></td>
+<td>intervalo interquantil</td>
+</tr>
+<tr class="odd">
+<td><code>quantile()</code></td>
+<td>quartis</td>
+</tr>
+<tr class="even">
+<td><code>var()</code></td>
+<td>variância</td>
+</tr>
+<tr class="odd">
+<td><code>cor()</code></td>
+<td>correlação</td>
+</tr>
+<tr class="even">
+<td><code>summary()</code></td>
+<td>métricas de sumarização</td>
+</tr>
+<tr class="odd">
+<td><code>rowMeans()</code></td>
+<td>média das linhas</td>
+</tr>
+<tr class="even">
+<td><code>colMeans()</code></td>
+<td>média das colunas</td>
+</tr>
+<tr class="odd">
+<td><code>rowSums()</code></td>
+<td>soma das linhas</td>
+</tr>
+<tr class="even">
+<td><code>colSums()</code></td>
+<td>soma das colunas</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tratamento-de-dados-omissos" class="section level3">
+<h3>Tratamento de dados omissos</h3>
+<p>O R permite que sejam armazenados, em vetores e data.frames, o valor <code>NA</code> (Not Available), que representa dados que ainda não são conhecidos.</p>
+<blockquote>
+<p><code>x == NA</code> trará sempre um resultado FALSE, mesmo que <code>x</code> não seja conhecido.</p>
+</blockquote>
+<p>
+<hr>
+<p>
+</div>
+</div>
+<div id="atividades-de-verificação-de-aprendizagem" class="section level2">
+<h2>Atividades de verificação de aprendizagem</h2>
+<p><strong>Questão 1:</strong> Abra o <code>data.frame</code> “iris”.</p>
+<pre class="r"><code>a &lt;- iris
+class(iris)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Calcule estatísticas básicas de cada variável. Copie e cole no Canvas (código e resultado).</li>
+</ol>
+<p>Veja o exemplo:</p>
+<pre class="r"><code>summary(iris$Sepal.Length)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   4.300   5.100   5.800   5.843   6.400   7.900</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Para que serve p símbolo <code>$</code> após o nome do data.frame?</li>
+<li>Por meio das funções <code>hist()</code> e <code>boxplot()</code>, respectivamente, gere um exemplo de cada gráfico para a variável que você escolher. Copie e cole no Canvas.</li>
+</ol>
+</div>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+</a><br />Esta obra esta licenciada sob Licenca <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuicao-Compartilha Igual 4.0 Internacional</a>.
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

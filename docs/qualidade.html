@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Gestão da Qualidade</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<script src="libs/ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77306155-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cursos 1/2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Fundamentos do ERE</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    GIS e Análise Espacial para Ciências Sociais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gis.html">Introdução ao QGIS</a>
+    </li>
+    <li>
+      <a href="qgis.html">QGIS e GeoDa</a>
+    </li>
+    <li>
+      <a href="verifica_qgis.html">Verificação de aprendizagem</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R para Análise Espacial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r.html">Introdução ao R e RStudio</a>
+    </li>
+    <li>
+      <a href="r2.html">Estatística descritiva com o R</a>
+    </li>
+    <li>
+      <a href="r3.html">Gráficos no R</a>
+    </li>
+    <li>
+      <a href="r4.html">Dados espaciais no R</a>
+    </li>
+    <li>
+      <a href="r5.html">Análise espacial no R</a>
+    </li>
+    <li>
+      <a href="r6.html">Medidas centrográficas</a>
+    </li>
+    <li>
+      <a href="materialr.html">Dicas sobre R</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="qualidade.html">Gestão da Qualidade</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/retaoliveira/R">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Gestão da Qualidade</h1>
+<h4 class="date">Last updated: 18 novembro, 2020</h4>
+
+</div>
+
+
+<div id="instrumentos-de-aprendizagem-na-disciplina" class="section level3">
+<h3>Instrumentos de aprendizagem na disciplina</h3>
+<div class="justa">
+<p>Esta disciplina será estruturada conforme unidades de ensino e com periodicidade em ciclos semanais. Propõe-se, com foco nos objetivos de aprendizagem centrados no estudante, as componentes apresentadas na Tabela 2.</p>
+</div>
+<p>Tabela 2: Estrutura Semanal da disciplina</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Componente
+</th>
+<th style="text-align:left;">
+Meio
+</th>
+<th style="text-align:left;">
+Objetivo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Material e conteúdo diversificado
+</td>
+<td style="text-align:left;">
+Vídeos, textos, quizzes, tutoriais
+</td>
+<td style="text-align:left;">
+Orientar estudantes na construção de conhecimento teórico e reflexão sobre conceitos, princípios e técnicas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Checkpoints - Situações-problema e atividades de verificação
+</td>
+<td style="text-align:left;">
+Vídeos, textos, quizzes, tutoriais
+</td>
+<td style="text-align:left;">
+Foco na aprendizagem baseada em problemas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tarefas preliminares (sala de aula invertida)
+</td>
+<td style="text-align:left;">
+Vídeos, textos, quizzes, tutoriais
+</td>
+<td style="text-align:left;">
+Instrumentos de provocação e reflexão quanto aos componentes da disciplina que serão discutidos nos encontros síncronos. Foco na capacidade de discussão, argumentação, interação e colaboração.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Encontros síncronos com o professor-tutor
+</td>
+<td style="text-align:left;">
+Plataforma com link para reunião
+</td>
+<td style="text-align:left;">
+Alinhamento de conceitos, princípios e técnicas, de forma sistemática, às propostas iniciais previstas na estrutura curricular da disciplina.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="encargos-da-disciplina" class="section level3">
+<h3>Encargos da disciplina</h3>
+<div class="justa">
+<p>Os alunos deverão entregar 02 atividades semanais e participar dos momentos síncronos. O registro da frequência será realizada por meio da entrega das atividades semanais. Caso o aluno opte por não participar dos encontros síncronos, bastará a entrega das atividades semanais. Entretanto, caso os alunos não realizem a entrega de alguma das atividades, o registro da frequência será realizado pela sua presença no momento síncrono.</p>
+</div>
+</div>
+<div id="instrumentos-de-avaliação" class="section level3">
+<h3>Instrumentos de avaliação</h3>
+<div class="justa">
+<p>A proposta avaliativa para esta disciplina é fundamentada nos objetivos de aprendizagem de cada componente. Assim, as atividades, bem como pontuação, foram distribuídos por semanas. Toda semana será pontuada, não sendo necessário provas ao longo da disciplina. Semanalmente, os alunos terão 02 atividades: os CHECKPOINTS e as TAREFAS PRELIMINARES. Os checkpoints serão momentos de verificação do conteúdo assimilado pelo aluno na semana, podendo ser apresentados na forma de fóruns, quizzes ou situações-problema. Já as TAREFAS PRELIMINARES são atividades preliminares que farão o aluno perceber o conteúdo que será ministrado na semana que ainda não se iniciou. Essas tarefas podem ser a gravação de um pequeno vídeo, uma foto, participação em fóruns, etc. A carga de trabalho está estruturada para fomentar a proposta de aprendizagem centrada no estudante. Em todas as atividades semanais, foram propostas rubricas (critérios) de avaliação para as atividades estruturadas.</p>
+</div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Atividades
+</th>
+<th style="text-align:right;">
+Quantidade
+</th>
+<th style="text-align:right;">
+Pontos unitários
+</th>
+<th style="text-align:right;">
+Pontos totais
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Tarefas preliminares
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Checkpoints-padrão
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Checkpoints alternativos
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="condições-para-aprovação-no-curso" class="section level3">
+<h3>Condições para aprovação no curso</h3>
+<div class="justa">
+<p>Para serem aprovados, cada aluno deve ter, no mínimo:</p>
+<p>75% de cumprimento da carga horária da disciplina, <strong>e</strong> 60 pontos</p>
+</div>
+<hr>
+</div>
+<div id="conteúdo-semanal" class="section level1">
+<h1><strong>Conteúdo Semanal</strong></h1>
+<aside>
+<p><strong>Conteúdo da página</strong> <a href="#estrutura-da-disciplina">Estrutura da disciplina</a> <a href="#conteúdo-semanal">Conteúdo semanal</a><br />
+<a href="#top">Início</a></p>
+</aside>
+<div id="semana-1-4a-revolução-industrial-e-competências-do-século-xxi" class="section level2">
+<h2>Semana 1: 4a Revolução industrial e competências do século XXI</h2>
+<div id="documentação" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p><a href="https://drive.google.com/file/d/1i88eNb0SFgOu3GZ7ViNNCe9cXfLMTgPk/view?usp=sharing">Aprendizagem baseada em problemas</a></p>
+<p><a href="https://drive.google.com/file/d/1DCHpym0QaGy5JzCnnh9YYnA5LVhn_7k0/view?usp=sharing">Contextualização - 4a revolução industrial e as competências do profissional no século XXI</a></p>
+</div>
+<div id="checkpoint" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 22/08/2020</p>
+<p><strong>Discussão: Como você se enxerga no mercado de trabalho do século XXI?</strong></p>
+<div class="justa">
+<p>Instruções:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assista os vídeos.</p></li>
+<li><p>Faça uma revisão dos conteúdos desta unidade.</p></li>
+<li><p>Realize o teste de múltiplas inteligências(Links para um site externo.) neste link.</p></li>
+<li><p>Faça uma reflexão sobre as demandas do mercado de trabalho e o quanto você pode contribuir com sua formação. Responda uma das questões a seguir (200-500 palavras, 2-4 parágrafos).</p></li>
+</ol>
+<ul>
+<li>O que você pode fazer para contribuir para sua formação no contexto do século XXI?<br />
+</li>
+<li>Quais são suas inteligências mais predominantes e como elas se relacionam com as competências para o século XXI?</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Poste sua resposta no Fórum - <a href="https://canvas.instructure.com/courses/2212314/discussion_topics/9484973">Checkpoint 1 - Canvas</a></li>
+</ol>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ngf8Jq2nuGc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2j00U6lUC-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RC--p1aCzWM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bKcBRTCXGEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bj9ciijbMj8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="tarefa-preliminar" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 25/08/2020</p>
+<p><strong>Discussão: Sistema input-output</strong></p>
+<p>Instruções:</p>
+<ol style="list-style-type: decimal">
+<li><p>Faça um pequeno vídeo (30 segundos a 1 minuto) registrando um processo de transformação.</p></li>
+<li><p>Explique qual é o processo que está sendo registrado no vídeo, enfatizando as suas entradas e as saídas.</p></li>
+<li><p>Poste sua resposta no <a href="https://canvas.instructure.com/courses/2212314/discussion_topics/9484958">Fórum 1 - Tarefa preliminar 1</a>.</p></li>
+</ol>
+<hr>
+</div>
+</div>
+<div id="semana-2-modelo-input-output" class="section level2">
+<h2>Semana 2: Modelo input-output</h2>
+<div id="documentação-1" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p>Os vídeos desta semana estão no Canvas. A temática central é a modelagem de processos de transformação por meio de modelos INPUT-OUTPUT. Alguns termos-chave foram explorados no momento síncrono, a saber:<br />
++ modelos<br />
++ eficiência, eficácia e efetividade<br />
++ produtividade<br />
++ complexidade<br />
++ escopo e limitação do sistema<br />
++ foco no processo + foco no cliente</p>
+</div>
+<div id="checkpoint-1" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 29/08/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/quizzes/5712185">Checkpoint semana 2</a></p>
+</div>
+<div id="tarefa-preliminar-1" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 01/09/2020</p>
+<p><strong>Discussão: Você acha que a empresa do filme tem Qualidade?</strong></p>
+<p>Instruções:</p>
+<div class="justa">
+<ol style="list-style-type: decimal">
+<li><p>Assista o vídeo</p></li>
+<li><p>Faça uma revisão dos conteúdos desta unidade.</p></li>
+<li><p>Faça uma reflexão sobre o conceito de qualidade e responda duas ou mais questões dentre as questões a seguir (200-500 palavras, 2-4 parágrafos).</p></li>
+</ol>
+<ul>
+<li>Analisando a empresa de fast-food que atende ao cliente do filme, ela tem qualidade?<br />
+</li>
+<li>Qualidade é ter um padrão de atendimento?<br />
+</li>
+<li>Qualidade é ter uma norma a ser seguida?<br />
+</li>
+<li>Qualidade é atender as necessidade do Cliente?<br />
+</li>
+<li>É ter um produto melhor do que o concorrente em termos de características?<br />
+</li>
+<li>É ter uma boa relação Custo x Benefício?</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Poste sua resposta no Fórum - <a href="https://canvas.instructure.com/courses/2212314/discussion_topics/9484958">Tarefa Preliminar 1</a></li>
+</ol>
+</div>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/8B9_kAGjrwg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div class="center">
+<p><strong>Conteúdo da página</strong><br />
+<a href="#estrutura-da-disciplina">Estrutura da disciplina</a><br />
+<a href="#conteúdo-semanal">Conteúdo semanal</a><br />
+<a href="#top">Início</a></p>
+</div>
+<HR>
+</div>
+</div>
+<div id="semana-3-evolução-do-conceito-de-qualidade" class="section level2">
+<h2>Semana 3: Evolução do conceito de qualidade</h2>
+<div id="documentação-2" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p>Nesta semana foram discutidas as perspectivas históricas e fundamentos da Gestão da Qualidade.</p>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/ejFZJARN_Fc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/oVyZbFuMqjQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/CP7uqDAA8GA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="checkpoint-2" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 05/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/quizzes/5859819?module_item_id=35334445">Checkpoint 3</a></p>
+</div>
+<div id="tarefa-preliminar-2" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 08/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/assignments/17413114?module_item_id=36303387">Atividade preliminar 3</a></p>
+<hr>
+</div>
+</div>
+<div id="semana-4-o-que-é-qualidade" class="section level2">
+<h2>Semana 4: O que é qualidade?</h2>
+<div id="documentação-3" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p><strong>Filosofia - qualidade</strong> Um pouco de história e filosofia…..</p>
+<p>Qualidade (do Latim qualitas) é um atributo ou uma propriedade. Os atributos são imputáveis por um sujeito enquanto as propriedades são inerentes. Na filosofia contemporânea, a ideia de qualidade e especialmente como distinguir certos tipos de qualidade de outros permanece controversa.</p>
+<p>Qualidade é uma noção que foi desenvolvida por Platão no contexto de sua Teoria das Formas, em que elaborou níveis de atributos e suas relações participantes nas Ideias. Aristóteles analisou qualidades em seu livro Categorias, trabalho lógico em que incluiu-a como uma das dez categorias.</p>
+<p>John Locke apresentou uma distinção entre qualidades primárias e secundárias em Um Ensaio acerca do Entendimento Humano. Para Locke, uma qualidade é uma ideia de uma sensação ou percepção. Locke afirma ainda que as qualidades podem ser divididas em dois tipos: qualidades primárias e secundárias. As qualidades primárias são intrínsecas a um objeto - uma coisa ou uma pessoa - enquanto as qualidades secundárias dependem da interpretação do modo subjetivo e do contexto da aparência.</p>
+<p>De forma sintética e contemporânea, o conceito de qualidade pode ser definido assim:</p>
+<p>Qualidade é o grau de utilidade esperado ou adquirido de qualquer coisa, verificável através da forma e dos elementos constitutivos do mesmo e pelo resultado do seu uso. A palavra “qualidade” tem um conceito subjetivo que está relacionada com as percepções, necessidades e resultados em cada indivíduo. Diversos fatores, como a cultura, modelos mentais, tipo e produto ou serviço prestado, necessidades e expectativas influenciam diretamente a percepção da qualidade.</p>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/N9CjgIqCixY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/U-aSq71QNNQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/BZ2e1OVGx-4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/53yJWHyaA4Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/yzvAPasFcAk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5cjf53TNfPQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="checkpoint-3" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 12/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/assignments/17011518?module_item_id=35334483">Checkpoint 4</a></p>
+</div>
+<div id="tarefa-preliminar-3" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 15/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/quizzes/5860114">Atividade preliminar 4</a></p>
+<hr>
+</div>
+</div>
+<div id="semana-5-normalização-e-normas-iso" class="section level2">
+<h2>Semana 5: Normalização e Normas ISO</h2>
+<div id="documentação-4" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p><strong>Certificação</strong> As empresas não são certificadas, e sim os processos.</p>
+<p>A primeira etapa para certificação é a definição do escopo para apropriação de certificação.</p>
+<p>Obras são interessantes exemplos de processos que poderiam ser padronizados por sua repetitividade, mas que, devido à intensividade do uso de mão-de-obra e, usualmente, trata-se de uma mão-de-obra pouco qualificada.</p>
+<p>Se o processo não está orientado à padronização, não se justifica</p>
+<p>Coca-cola não tem ISO. Coca-cola tem o sistema de qualidade dela mesma - Kore. Ferramenta de governança e gestão por meio da qual ela consegue avaliar o desempenho. Incorpora ISO 9000, ISO 14000 e outras certificações.</p>
+<p>A própria empresa audita e o mercado é o próprio mercado audita.</p>
+<p>Década de 80, a indústria automobilística.</p>
+<p>a série ISO 9000 é de certificação de processos e gestão. É uma série de 1987 e é modificada em 1994, 2000, 2008 e 2015.</p>
+<p><strong>Histórico</strong> 1987 - Criação da série ISO 9000 com foco em padronização 1994 - o foco é orientado aos requisitos da norma 2000 - foco no cliente externo 2008 - requisitos. 2015 - flexibilização de requisitos.</p>
+<p>a série ISO 14000 é a série de gestão ambiental.</p>
+<p>Norma antiga não tinha preocupação com a qualidade e sim com padronização dos processos. Norma não refletia envolvimento de stakeholders e não deixava claro o comprometimento da alta administração com a qualidade. Era uma norma de 2000, com versão atualizada em 2008 e que em 2015 foi atualizada.</p>
+<p>Padronização - estabelecer regra de forma que todo mundo desenvolva os processos da mesma maneira.</p>
+<p>Ter certificação para ganhar credibilidade no mercado.</p>
+<p>No Brasil, temos cerca de 25.000 empresas certificadas na norma ISO.</p>
+<p>Termo da ISO para falar que um procedimento está correto ou não é conformidade ou não conformidade.</p>
+<p>Há produtos brasileiros da Tramontina que precisam de certificação e precisam finalizar a produção para sair de Portugal made in Portugal.</p>
+<p>Quem financia - governo exige - FINAME - cliente exige pelas demandas acessórias.</p>
+<p>Pontos de atenção.</p>
+<p>Quando a modificação da norma foi alterada em 2015, o prazo para mudança era setembro 2018 para readequação. 90% não tinham pedido. Ou aprendi e não preciso de certificação ou não consigo adequar. Norma nova exige informação documentada e não mais procedimentos. Por outro lado, se discutimos indústria 4.0, integração de processos com cliente em tempo real, os procedimentos têm que ser o mais padronizados possíveis. Linha de produção. Para projetos, por exemplo, pode haver uma diferenciação em função do cliente e do escopo do projeto.</p>
+<p>A norma ISO vale por 3 anos.</p>
+<p>CEP - os gráficos falam que vai dar errado antes de acontecer.</p>
+<p>No Brasil, a série ISO 9000 foi recepcionada pela ABNT, mas não há obrigatoriedade</p>
+<p>Normas servem para padronização de processos e do nosso funcionamento como sociedade.</p>
+<p>O organismo de creditação é aquele que fala que a empresa está de acordo com a norma. Quando as auditorias internas estão com um nível de maturidade adequado, é possível agendar a visita para certificação.</p>
+<p>Certificação da norma nova é Bureau Veritas - empresa de creditação.</p>
+<p>A norma mudou para independência da certificação. E para envolvimento da gestão risco e meta. Incorpora partes interessada, compatibiliza com outras normas de gestão e gestão pública, o número de exigência documental é reduzido. Não há exigência de manual de qualidade documentado com troca de documento controlada. Foi implantado também um sistema de gestão de risco.</p>
+<p>Pela primeira vez, em 2015, a norma ISO 9001 incorporou a gestão.</p>
+<p>Liderança fica no meio, mas o pano de fundo é o processo. Todas as referências baseadas em evidências. Processo de tomada de decisão em evidências.</p>
+<p><strong>Outros documentos</strong> <iframe width="560" height="314" src="https://www.youtube.com/embed/lhnO-sAuiUo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/kdlizwJLCME" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/rIKVC1PEKiY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/skjEVAet35s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/-F4ShMqPM7c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/KzWsTqZMuEk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/BZFDcsWiGtQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/KyNVxU5EU9Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe src="https://places-research.github.io/qua_sinc_5/#1" width="672" height="400px">
+</iframe>
+</div>
+<div id="checkpoint-4" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 19/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/assignments/17575870?module_item_id=36697473">Checkpoint 5</a></p>
+</div>
+<div id="tarefa-preliminar-4" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 22/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/quizzes/6086974">Atividade preliminar 5</a></p>
+<hr>
+</div>
+</div>
+<div id="semana-6-kaizen-pdca-masp" class="section level2">
+<h2>Semana 6: Kaizen, PDCA, MASP</h2>
+<div id="documentação-5" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p>Kaizen foi traduzido como Melhoria Contínua para o mundo ocidental.</p>
+<p>Mas, é mais que isso.</p>
+<p>Kaizen é a insatisfação com o “status quo”. É a melhoria de todo dia. Vejam o que ensina o Prof. Imai.</p>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/NUDkhmb7HFM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>
+<p>Para entendimento do processo de melhoria, duas questões devem ser respondidas: </p>
+</p>
+<ul>
+<li>
+<p>Por que é necessário fazer essa melhoria?</p>
+</li>
+<li>
+<p>Para quem será feita essa melhoria?</p>
+</li>
+</ul>
+<p>
+<p>Assim, algumas estratégias e respectivos fundamentos podem ser pensados para implementação do processo de melhoria, a saber:</p>
+</p>
+<ol>
+<li>
+<p>5S: estrutura - ambiente de trabalho, procedimentos e instruções, anormalidades visíveis</p>
+</li>
+<li>
+<p><strong>Kaizen</strong><span style="font-size: 12pt;">: visão geral - gestão por KPIs, controle do trabalho em processamento, cultura de melhoria contínua</span></p>
+</li>
+<li>
+<p>Lean: estabilidade - processos estáveis, eliminação de desperdícios, fluxo</p>
+</li>
+<li>
+<p>Six Sigma: capacidade - redução da variabilidade, controle dos processos, ferramentas estatísticas</p>
+</li>
+<li>
+<p>DFSS (Design for Six Sigma): Robustez - planejamento para o seis sigma, QFD</p>
+</li>
+</ol>
+<p>
+<p><img src="http://jplogistica.com.br/wp-content/uploads/2018/01/KAIZEN.jpg" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+</p>
+<p>
+<p><img src="https://i1.wp.com/betaeq.com.br/wp-content/uploads/2016/04/kaizen-300x201.jpg?resize=194%2C130" alt="kaizen" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+</p>
+<p>
+<p>A palavra “Kaizen” tem sua origem no idioma japonês e significa “melhoria” e refere-se a filosofia ou práticas que incidem sobre a melhoria contínua dos processos de manufatura, engenharia, gestão de negócios ou qualquer processo como até mesmo na área da saúde, governos, bancos e outras indústrias. Ao melhorar as atividades e processos padronizados, kaizen tem como objetivo eliminar o desperdício (ver manufatura enxuta). </p>
+</p>
+<p>
+<p><span style="color: #000000;">O Kaizen tem origem no Japão (</span><em>Kaizen: The Key to Japan’s Competitive Success</em> em 1986, de Masaaki Imai). Ele se baseia em uma série de princípios:</p>
+</p>
+<ul>
+<li>
+<p><span style="color: #000000;">eliminação de desperdícios.</span></p>
+</li>
+<li>
+<p><span style="color: #000000;">orientação à processos.</span></p>
+</li>
+<li>
+<p><span style="color: #000000;">dados e fatos.</span></p>
+</li>
+<li>
+<p><span style="color: #000000;">atenção deve estar no local onde o valor é criado.</span></p>
+</li>
+<li>
+<p><span style="color: #000000;">trabalho em equipe.</span></p>
+</li>
+<li>
+<p><span style="color: #000000;">realizar ações para conter e corrigir as causas bases dos problemas.</span></p>
+</li>
+</ul>
+<h4>
+<p><span style="text-decoration: underline;">Por quê promover a melhoria contínua?</span></p>
+</h4>
+<p>
+<p>Para atender aos requisitos da normalização, ou para atingir os objetivos do <strong><i>kaizen,</i></strong> como:</p>
+</p>
+<ul>
+<li>
+<p>melhoria na qualidade;</p>
+</li>
+<li>
+<p>redução de custos;</p>
+</li>
+<li>
+<p>aumento na satisfação do cliente;</p>
+</li>
+<li>
+<p>mais segurança;</p>
+</li>
+<li>
+<p>redução de desperdício na empresa;</p>
+</li>
+<li>
+<p>aumento de produtividade;</p>
+</li>
+<li>
+<p>compartilhamento do conhecimento;</p>
+</li>
+<li>
+<p>maior confiabilidade das máquinas/equipamentos.</p>
+</li>
+</ul>
+<h4>
+<p><span style="text-decoration: underline;">Caracterizando os métodos</span></p>
+</h4>
+<p>
+<p>No quadro a seguir são apresentados os métodos mais difundidos de solução de problemas e melhoria contínua. De maneira sintética, os métodos são desdobramento do ciclo de Deming.</p>
+</p>
+<p>
+<p>A ideia é promover a análise de problemas considerando o método científico, de maneira organizada e efetiva. </p>
+</p>
+<p>31b8e172-b470-440e-83d8-e6b185028602:dAB5AHAAZQA6AE8AQQBCAGwAQQBHAFkAQQBOAFEAQgBoAEEARABjAEEATgB3AEEAeQBBAEMAMABBAFoAQQBCAGsAQQBEAFkAQQBNAHcAQQB0AEEARABRAEEATgBnAEEAeQBBAEQASQBBAEwAUQBBADQAQQBEAFEAQQBZAGcAQgBtAEEAQwAwAEEAWQBRAEIAbQBBAEQARQBBAE8AUQBBADUAQQBEAFUAQQBZAFEAQQB4AEEARwBJAEEATQBnAEIAaQBBAEQAawBBAAoAcABvAHMAaQB0AGkAbwBuADoATQBnAEEAegBBAEQAQQBBAE8AQQBBAHcAQQBBAD0APQAKAHAAcgBlAGYAaQB4ADoACgBzAG8AdQByAGMAZQA6AFAAQQBCADAAQQBHAEUAQQBZAGcAQgBzAEEARwBVAEEASQBBAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBQAFEAQQBpAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAbwBBAEkAQQBCAGsAQQBHADgAQQBkAEEAQgAwAEEARwBVAEEAWgBBAEEANwBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARABvAEEASQBBAEEAeABBAEQAVQBBAE8AQQBBAHoAQQBIAEEAQQBlAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAZwBBAEcAMABBAFkAUQBCAHkAQQBHAGMAQQBhAFEAQgB1AEEAQwAwAEEAYgBBAEIAbABBAEcAWQBBAGQAQQBBADYAQQBDAEEAQQBZAFEAQgAxAEEASABRAEEAYgB3AEEANwBBAEMAQQBBAGIAUQBCAGgAQQBIAEkAQQBaAHcAQgBwAEEARwA0AEEATABRAEIAeQBBAEcAawBBAFoAdwBCAG8AQQBIAFEAQQBPAGcAQQBnAEEARwBFAEEAZABRAEIAMABBAEcAOABBAE8AdwBBAGkAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAFAAUQBBAGkAQQBEAEUAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAFEAQQAxAEEARABnAEEATQB3AEEAaQBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBZAGcAQgB2AEEARwBRAEEAZQBRAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBIAEkAQQBQAGcAQQBLAEEARAB3AEEAZABBAEIAawBBAEMAQQBBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARAAwAEEASQBnAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADYAQQBDAEEAQQBaAEEAQgB2AEEASABRAEEAZABBAEIAbABBAEcAUQBBAE8AdwBBAGcAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAFkAdwBCAHYAQQBHAHcAQQBiAHcAQgB5AEEARABvAEEASQBBAEIAaQBBAEcAdwBBAGQAUQBCAGwAQQBEAHMAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAFEAQQAxAEEARABVAEEASQBnAEEAKwBBAEYAQQBBAFIAQQBCAEQAQQBFAEUAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBUAFEAQgBCAEEARgBNAEEAVQBBAEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEEANABBAEUAUQBBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAZAB3AEIAcABBAEcAUQBBAGQAQQBCAG8AQQBEADAAQQBJAGcAQQB5AEEARABBAEEATgBBAEEAaQBBAEQANABBAFEAUQBBAHoAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgAYwBBAGEAUQBCAGsAQQBIAFEAQQBhAEEAQQA5AEEAQwBJAEEATQBnAEEAdwBBAEQAUQBBAEkAZwBBACsAQQBFAFEAQQBUAFEAQgBCAEEARQBrAEEAUQB3AEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIARwBBAEYAUQBBAFEAUQBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAFMAQQBFAE0AQQBRAFEAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBVAEEAQwBZAEEAWgBRAEIAaABBAEcATQBBAGQAUQBCADAAQQBHAFUAQQBPAHcAQgBqAEEARwA0AEEAYQBRAEIAagBBAEcARQBBAGMAdwBBAGcAQQBHAFUAQQBJAEEAQgB0AEEAQwBZAEEAWgBRAEIAaABBAEcATQBBAGQAUQBCADAAQQBHAFUAQQBPAHcAQgAwAEEARwA4AEEAWgBBAEIAdgBBAEgATQBBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEEAdgBBAEgAUQBBAGMAZwBBACsAQQBBAG8AQQBQAEEAQgAwAEEASABJAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQAYwBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AUQBBADEAQQBEAFUAQQBJAGcAQQArAEEARgBBAEEAYgBBAEIAaABBAEcANABBAFoAUQBCAHEAQQBHAEUAQQBjAGcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCAHkAQQBHADgAQQBkAHcAQgB6AEEASABBAEEAWQBRAEIAdQBBAEQAMABBAEkAZwBBAHkAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIARQBBAEcAVQBBAFoAZwBCAHAAQQBHADQAQQBhAFEAQgB5AEEAQwBBAEEAYgB3AEEAZwBBAEgAQQBBAGMAZwBCAHYAQQBHAEkAQQBiAEEAQgBsAEEARwAwAEEAWQBRAEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgB5AEEARwA4AEEAZAB3AEIAegBBAEgAQQBBAFkAUQBCAHUAQQBEADAAQQBJAGcAQQB5AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAEUAQQBEAEUAQQBJAEEAQQB0AEEAQwBBAEEAVABRAEIAdgBBAEcANABBAGQAQQBCAGgAQQBIAEkAQQBJAEEAQgBoAEEAQwBBAEEAWgBRAEIAeABBAEgAVQBBAGEAUQBCAHcAQQBHAFUAQQBJAEEAQgB0AEEASABVAEEAYgBBAEIAMABBAEcAawBBAFoAQQBCAHAAQQBIAE0AQQBZAHcAQgBwAEEASABBAEEAYgBBAEIAcABBAEcANABBAFkAUQBCAHkAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQASQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBRAEEAWgBRAEIAbQBBAEcAawBBAGIAZwBCAHAAQQBIAEkAQQBJAEEAQgB3AEEASABJAEEAYgB3AEIAaQBBAEcAdwBBAFoAUQBCAHQAQQBHAEUAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGMAZwBCAHYAQQBIAGMAQQBjAHcAQgB3AEEARwBFAEEAYgBnAEEAOQBBAEMASQBBAE0AZwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAUgBBAEIAbABBAEcAWQBBAGEAUQBCAHUAQQBHAGsAQQBjAGcAQQBnAEEAQwBnAEEAUgBBAEIAbABBAEcAWQBBAGEAUQBCAHUAQQBHAFUAQQBLAFEAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCAHkAQQBHADgAQQBkAHcAQgB6AEEASABBAEEAWQBRAEIAdQBBAEQAMABBAEkAZwBBAHkAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIARQBBAEcAVQBBAFoAZwBCAHAAQQBHADQAQQBhAFEAQgB5AEEAQwBBAEEAYgB3AEEAZwBBAEcAVQBBAGQAZwBCAGwAQQBHADQAQQBkAEEAQgB2AEEAQwBBAEEAWgBBAEIAbABBAEMAQQBBAGQAQQBCAHYAQQBIAEEAQQBiAHcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBEAEEARwA4AEEAYgBBAEIAbABBAEgAUQBBAFkAUQBCAHkAQQBDAEEAQQBiAHcAQgB6AEEAQwBBAEEAWgBBAEIAaABBAEcAUQBBAGIAdwBCAHoAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQASQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQA4AEEAWQBnAEIAegBBAEcAVQBBAGMAZwBCADIAQQBHAEUAQQBKAGcAQgBqAEEARwBNAEEAWgBRAEIAawBBAEcAawBBAGIAQQBBADcAQQBDAFkAQQBZAFEAQgAwAEEARwBrAEEAYgBBAEIAawBBAEcAVQBBAE8AdwBCAHYAQQBDAEEAQQBaAFEAQQB2AEEARwA4AEEAZABRAEEAZwBBAEcAYwBBAGMAZwBBAG0AQQBHAEUAQQBZAFEAQgBqAEEASABVAEEAZABBAEIAbABBAEQAcwBBAFoAZwBCAHAAQQBHAE0AQQBiAHcAQQBnAEEARwBRAEEAWgBRAEEAZwBBAEYAQQBBAFkAUQBCAHkAQQBHAFUAQQBkAEEAQgB2AEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBMAHcAQgAwAEEASABJAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAHkAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIATgBBAEcAOABBAGIAZwBCADAAQQBHAEUAQQBjAGcAQQBnAEEARwBFAEEASQBBAEIAbABBAEgARQBBAGQAUQBCAHAAQQBIAEEAQQBaAFEAQQBnAEEARwAwAEEAZABRAEIAcwBBAEgAUQBBAGEAUQBCAGsAQQBHAGsAQQBjAHcAQgBqAEEARwBrAEEAYwBBAEIAcwBBAEcAawBBAGIAZwBCAGgAQQBIAEkAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBBAHYAQQBIAFEAQQBjAGcAQQArAEEAQQBvAEEAUABBAEIAMABBAEgASQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQA4AEEAWQBnAEIAegBBAEcAVQBBAGMAZwBCADIAQQBHAEUAQQBjAGcAQQBnAEEARwA4AEEASQBBAEIAcwBBAEcAOABBAFkAdwBCAGgAQQBHAHcAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBSAEEAQQB5AEEAQwBBAEEATABRAEEAZwBBAEUAUQBBAFoAUQBCAHoAQQBHAE0AQQBjAGcAQgBsAEEASABZAEEAWgBRAEIAeQBBAEMAQQBBAGIAdwBBAGcAQQBIAEEAQQBjAGcAQgB2AEEARwBJAEEAYgBBAEIAbABBAEcAMABBAFkAUQBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAEUAQQBHAFUAQQBjAHcAQgBqAEEASABJAEEAWgBRAEIAMgBBAEcAVQBBAGMAZwBBAGcAQQBHADgAQQBJAEEAQgB3AEEASABJAEEAYgB3AEIAaQBBAEcAdwBBAFoAUQBCAHQAQQBHAEUAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBUAFEAQgBsAEEARwBRAEEAYQBRAEIAeQBBAEMAQQBBAEsAQQBCAE4AQQBHAFUAQQBZAFEAQgB6AEEASABVAEEAYwBnAEIAbABBAEMAawBBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAZAB3AEIAcABBAEcAUQBBAGQAQQBCAG8AQQBEADAAQQBJAGcAQQB5AEEARABBAEEATgBBAEEAaQBBAEQANABBAFEAdwBCAHYAQQBHADAAQQBjAEEAQgB5AEEARwBVAEEAWgBRAEIAdQBBAEcAUQBBAFoAUQBCAHkAQQBDAEEAQQBiAHcAQQBnAEEASABNAEEAYQBRAEIAegBBAEgAUQBBAFoAUQBCAHQAQQBHAEUAQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGMAZwBCAHYAQQBIAGMAQQBjAHcAQgB3AEEARwBFAEEAYgBnAEEAOQBBAEMASQBBAE0AZwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAUgBBAEIAbABBAEgATQBBAFkAdwBCAHkAQQBHAFUAQQBkAGcAQgBsAEEASABJAEEASQBBAEIAdgBBAEMAQQBBAGMAQQBCAHkAQQBHADgAQQBZAGcAQgBzAEEARwBVAEEAYgBRAEIAaABBAEQAdwBBAEwAdwBCADAAQQBHAFEAQQBQAGcAQQBLAEEARAB3AEEAZABBAEIAawBBAEMAQQBBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARAAwAEEASQBnAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADYAQQBDAEEAQQBaAEEAQgB2AEEASABRAEEAZABBAEIAbABBAEcAUQBBAE8AdwBBAGcAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAFkAdwBCAHYAQQBHAHcAQQBiAHcAQgB5AEEARABvAEEASQBBAEIAaQBBAEcAdwBBAGQAUQBCAGwAQQBEAHMAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAGcAQQB3AEEARABRAEEASQBnAEEAKwBBAEUARQBBAEoAZwBCAGoAQQBHAE0AQQBaAFEAQgBrAEEARwBrAEEAYgBBAEEANwBBAEMAWQBBAFkAUQBCADAAQQBHAGsAQQBiAEEAQgBrAEEARwBVAEEATwB3AEIAdgBBAEMAQQBBAFoAQQBCAGwAQQBDAEEAQQBZAHcAQgB2AEEARwA0AEEAZABBAEIAbABBAEcANABBAEoAZwBCAGoAQQBHAE0AQQBaAFEAQgBrAEEARwBrAEEAYgBBAEEANwBBAEMAWQBBAFkAUQBCADAAQQBHAGsAQQBiAEEAQgBrAEEARwBVAEEATwB3AEIAdgBBAEMAQQBBAFoAUQBBAGcAQQBHADgAQQBZAGcAQgB6AEEARwBVAEEAYwBnAEIAMgBBAEcARQBBAEoAZwBCAGoAQQBHAE0AQQBaAFEAQgBrAEEARwBrAEEAYgBBAEEANwBBAEMAWQBBAFkAUQBCADAAQQBHAGsAQQBiAEEAQgBrAEEARwBVAEEATwB3AEIAdgBBAEQAdwBBAEwAdwBCADAAQQBHAFEAQQBQAGcAQQBLAEEARAB3AEEATAB3AEIAMABBAEgASQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgB5AEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAeQBBAEcAOABBAGQAdwBCAHoAQQBIAEEAQQBZAFEAQgB1AEEARAAwAEEASQBnAEEAegBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBCAEEARwA0AEEAWQBRAEIAcwBBAEcAawBBAGMAdwBCAGgAQQBIAEkAQQBJAEEAQgBoAEEASABNAEEASQBBAEIAagBBAEcARQBBAGQAUQBCAHoAQQBHAEUAQQBjAHcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBFAEEARABNAEEASQBBAEEAdABBAEMAQQBBAFMAUQBCAHQAQQBIAEEAQQBiAEEAQgBsAEEARwAwAEEAWgBRAEIAdQBBAEgAUQBBAFkAUQBCAHkAQQBDAEEAQQBaAFEAQQBnAEEASABZAEEAWgBRAEIAeQBBAEcAawBBAFoAZwBCAHAAQQBHAE0AQQBZAFEAQgB5AEEAQwBBAEEAWQBRAEEAbQBBAEcATQBBAFkAdwBCAGwAQQBHAFEAQQBhAFEAQgBzAEEARABzAEEASgBnAEIAdgBBAEgAUQBBAGEAUQBCAHMAQQBHAFEAQQBaAFEAQQA3AEEARwBVAEEAYwB3AEEAZwBBAEcAUQBBAFoAUQBBAGcAQQBHAE0AQQBiAHcAQgB1AEEASABRAEEAWgBRAEEAbQBBAEcATQBBAFkAdwBCAGwAQQBHAFEAQQBhAFEAQgBzAEEARABzAEEASgBnAEIAaABBAEgAUQBBAGEAUQBCAHMAQQBHAFEAQQBaAFEAQQA3AEEARwA4AEEAUABBAEEAdgBBAEgAUQBBAFoAQQBBACsAQQBBAG8AQQBQAEEAQgAwAEEARwBRAEEASQBBAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBQAFEAQQBpAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAbwBBAEkAQQBCAGsAQQBHADgAQQBkAEEAQgAwAEEARwBVAEEAWgBBAEEANwBBAEMAQQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAagBBAEcAOABBAGIAQQBCAHYAQQBIAEkAQQBPAGcAQQBnAEEARwBJAEEAYgBBAEIAMQBBAEcAVQBBAE8AdwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAUgBBAEIAbABBAEcAWQBBAGEAUQBCAHUAQQBHAGsAQQBjAGcAQQBnAEEARwBFAEEASQBBAEIAdABBAEcAVQBBAGQAQQBCAGgAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQAUQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBFAEEAYgBnAEIAaABBAEcAdwBBAGEAUQBCAHoAQQBHAEUAQQBjAGcAQQBnAEEAQwBnAEEAUQBRAEIAdQBBAEcARQBBAGIAQQBCADUAQQBIAE0AQQBaAFEAQQBwAEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBNAEEAYgB3AEIAdQBBAEgATQBBAGQAQQBCAHkAQQBIAFUAQQBhAFEAQgB5AEEAQwBBAEEAWQBRAEEAZwBBAEMAWQBBAFkAUQBCAGgAQQBHAE0AQQBkAFEAQgAwAEEARwBVAEEATwB3AEIAeQBBAEgAWQBBAGIAdwBCAHkAQQBHAFUAQQBJAEEAQgBrAEEARwBVAEEASQBBAEIAbQBBAEcARQBBAGIAQQBCAG8AQQBHAEUAQQBjAHcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBKAEEARwBRAEEAWgBRAEIAdQBBAEgAUQBBAGEAUQBCAG0AQQBHAGsAQQBZAHcAQgBoAEEASABJAEEASQBBAEIAaABBAEgATQBBAEkAQQBCAGoAQQBHADgAQQBiAFEAQgB3AEEARwBVAEEAZABBAEEAbQBBAEcAVQBBAFkAdwBCAHAAQQBIAEkAQQBZAHcAQQA3AEEARwA0AEEAWQB3AEIAcABBAEcARQBBAGMAdwBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEMAOABBAGQAQQBCAHkAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAYwBnAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGMAZwBCAHYAQQBIAGMAQQBjAHcAQgB3AEEARwBFAEEAYgBnAEEAOQBBAEMASQBBAE0AZwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAUgBBAEEAMABBAEMAQQBBAEwAUQBBAGcAQQBFAEUAQQBiAGcAQgBoAEEARwB3AEEAYQBRAEIAegBBAEcARQBBAGMAZwBBAGcAQQBHAEUAQQBJAEEAQgBqAEEARwBFAEEAZABRAEIAegBBAEcARQBBAEkAQQBCAHkAQQBHAEUAQQBhAFEAQgA2AEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAEkAQQBiAHcAQgAzAEEASABNAEEAYwBBAEIAaABBAEcANABBAFAAUQBBAGkAQQBEAEkAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAGcAQQB3AEEARABRAEEASQBnAEEAKwBBAEUARQBBAGIAZwBCAGgAQQBHAHcAQQBhAFEAQgB6AEEARwBFAEEAYwBnAEEAZwBBAEcARQBBAEkAQQBCAGoAQQBHAEUAQQBkAFEAQgB6AEEARwBFAEEASQBBAEIAeQBBAEcARQBBAGEAUQBCADYAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQATQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBFAEEAZABnAEIAaABBAEcAdwBBAGEAUQBCAGgAQQBIAEkAQQBJAEEAQgBoAEEAQwBBAEEASgBnAEIAaABBAEcARQBBAFkAdwBCADEAQQBIAFEAQQBaAFEAQQA3AEEASABJAEEAZABnAEIAdgBBAEgASQBBAFoAUQBBAGcAQQBHAFEAQQBaAFEAQQBnAEEARwBZAEEAWQBRAEIAcwBBAEcAZwBBAFkAUQBCAHoAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgAYwBBAGEAUQBCAGsAQQBIAFEAQQBhAEEAQQA5AEEAQwBJAEEATQBnAEEAdwBBAEQAUQBBAEkAZwBBACsAQQBFAFUAQQBjAHcAQgAwAEEASABJAEEAZABRAEIAMABBAEgAVQBBAGMAZwBCAGgAQQBIAEkAQQBJAEEAQgBoAEEAQwBBAEEAWQBRAEIAdQBBAEMAWQBBAFkAUQBCAGgAQQBHAE0AQQBkAFEAQgAwAEEARwBVAEEATwB3AEIAcwBBAEcAawBBAGMAdwBCAGwAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgAYwBBAGEAUQBCAGsAQQBIAFEAQQBhAEEAQQA5AEEAQwBJAEEATQBnAEEAdwBBAEQAUQBBAEkAZwBBACsAQQBFAEkAQQBjAGcAQgBoAEEARwBrAEEAYgBnAEIAegBBAEgAUQBBAGIAdwBCAHkAQQBHADAAQQBhAFEAQgB1AEEARwBjAEEATABBAEEAZwBBAEUAawBBAGMAdwBCAG8AQQBHAGsAQQBhAHcAQgBoAEEASABjAEEAWQBRAEEAZwBBAEcAVQBBAEkAQQBBADEAQQBDAEEAQQBVAEEAQgB2AEEASABJAEEAYwBRAEIAMQBBAEMAWQBBAFoAUQBCAGoAQQBHAGsAQQBjAGcAQgBqAEEARABzAEEAYwB3AEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEAQwA4AEEAZABBAEIAeQBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBjAGcAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAYwBnAEIAdgBBAEgAYwBBAGMAdwBCAHcAQQBHAEUAQQBiAGcAQQA5AEEAQwBJAEEATQBnAEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBRAFEAQgB1AEEARwBFAEEAYgBBAEIAcABBAEgATQBBAFkAUQBCAHkAQQBDAEEAQQBZAFEAQQBnAEEARwBNAEEAWQBRAEIAMQBBAEgATQBBAFkAUQBBAGcAQQBIAEkAQQBZAFEAQQBtAEEARwBrAEEAWQBRAEIAagBBAEgAVQBBAGQAQQBCAGwAQQBEAHMAQQBlAGcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCAHkAQQBHADgAQQBkAHcAQgB6AEEASABBAEEAWQBRAEIAdQBBAEQAMABBAEkAZwBBAHkAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEEAMQBBAEYAYwBBAE0AZwBCAEkAQQBDAEEAQQBaAFEAQQBnAEEARQBjAEEAVgBRAEIAVQBBAEMAWQBBAGIAZwBCAGkAQQBIAE0AQQBjAEEAQQA3AEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBMAHcAQgAwAEEASABJAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAHkAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIARgBBAEcAdwBBAFkAUQBCAGkAQQBHADgAQQBjAGcAQgBoAEEASABJAEEASQBBAEIAdgBBAEMAQQBBAGMAQQBCAHMAQQBHAEUAQQBiAGcAQgB2AEEAQwBBAEEAWgBBAEIAbABBAEMAQQBBAFkAUQBBAG0AQQBHAE0AQQBZAHcAQgBsAEEARwBRAEEAYQBRAEIAcwBBAEQAcwBBAEoAZwBCAGgAQQBIAFEAQQBhAFEAQgBzAEEARwBRAEEAWgBRAEEANwBBAEcAOABBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAZAB3AEIAcABBAEcAUQBBAGQAQQBCAG8AQQBEADAAQQBJAGcAQQB5AEEARABBAEEATgBBAEEAaQBBAEQANABBAFIAQQBBADEAQQBDAEEAQQBMAFEAQQBnAEEARQBVAEEAYgBBAEIAaABBAEcASQBBAGIAdwBCAHkAQQBHAEUAQQBjAGcAQQBnAEEASABBAEEAYgBBAEIAaABBAEcANABBAGIAdwBBAGcAQQBHAFEAQQBaAFEAQQBnAEEARwBFAEEASgBnAEIAagBBAEcATQBBAFoAUQBCAGsAQQBHAGsAQQBiAEEAQQA3AEEAQwBZAEEAWQBRAEIAMABBAEcAawBBAGIAQQBCAGsAQQBHAFUAQQBPAHcAQgB2AEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBVAEEAYgBBAEIAaABBAEcASQBBAGIAdwBCAHkAQQBHAEUAQQBjAGcAQQBnAEEARwA4AEEASQBBAEIAdwBBAEcAdwBBAFkAUQBCAHUAQQBHADgAQQBJAEEAQgBrAEEARwBVAEEASQBBAEIAaABBAEMAWQBBAFkAdwBCAGoAQQBHAFUAQQBaAEEAQgBwAEEARwB3AEEATwB3AEEAbQBBAEcARQBBAGQAQQBCAHAAQQBHAHcAQQBaAEEAQgBsAEEARABzAEEAYgB3AEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEAQwA4AEEAZABBAEIAeQBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBjAGcAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAYwBnAEIAdgBBAEgAYwBBAGMAdwBCAHcAQQBHAEUAQQBiAGcAQQA5AEEAQwBJAEEATQB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeABBAEQAVQBBAE4AUQBBAGkAQQBEADQAQQBSAEEAQgBsAEEASABNAEEAWgBRAEIAdQBBAEgAWQBBAGIAdwBCAHMAQQBIAFkAQQBaAFEAQgB5AEEAQwBBAEEASwBBAEIARQBBAEcAOABBAEsAUQBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAeQBBAEcAOABBAGQAdwBCAHoAQQBIAEEAQQBZAFEAQgB1AEEARAAwAEEASQBnAEEAegBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBKAEEARwAwAEEAYwBBAEIAcwBBAEcAVQBBAGIAUQBCAGwAQQBHADQAQQBkAEEAQgBoAEEASABJAEEASQBBAEIAaABBAEgATQBBAEkAQQBCAGgAQQBDAFkAQQBZAHcAQgBqAEEARwBVAEEAWgBBAEIAcABBAEcAdwBBAE8AdwBBAG0AQQBHADgAQQBkAEEAQgBwAEEARwB3AEEAWgBBAEIAbABBAEQAcwBBAFoAUQBCAHoAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQATQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBRAEEATgBnAEEAZwBBAEMAMABBAEkAQQBCAEoAQQBHADAAQQBjAEEAQgBzAEEARwBVAEEAYgBRAEIAbABBAEcANABBAGQAQQBCAGgAQQBIAEkAQQBJAEEAQgBoAEEAQwBZAEEAWQB3AEIAagBBAEcAVQBBAFoAQQBCAHAAQQBHAHcAQQBPAHcAQQBtAEEARwA4AEEAZABBAEIAcABBAEcAdwBBAFoAQQBCAGwAQQBEAHMAQQBaAFEAQgB6AEEAQwBBAEEAWQB3AEIAdgBBAEgASQBBAGMAZwBCAGwAQQBIAFEAQQBhAFEAQgAyAEEARwBFAEEAYwB3AEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgB5AEEARwA4AEEAZAB3AEIAegBBAEgAQQBBAFkAUQBCAHUAQQBEADAAQQBJAGcAQQB6AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAFcAQQBHAFUAQQBjAGcAQgBwAEEARwBZAEEAYQBRAEIAagBBAEcARQBBAGMAZwBBAGcAQQBHAEUAQQBjAHcAQQBnAEEARwBNAEEAYgB3AEIAdQBBAEgAUQBBAGMAZwBCAGgAQQBHADAAQQBaAFEAQgBrAEEARwBrAEEAWgBBAEIAaABBAEgATQBBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEIAMABBAEcAUQBBAEkAQQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEAUABRAEEAaQBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEAG8AQQBJAEEAQgBrAEEARwA4AEEAZABBAEIAMABBAEcAVQBBAFoAQQBBADcAQQBDAEEAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAGoAQQBHADgAQQBiAEEAQgB2AEEASABJAEEATwBnAEEAZwBBAEcASQBBAGIAQQBCADEAQQBHAFUAQQBPAHcAQQBpAEEAQwBBAEEAYwBnAEIAdgBBAEgAYwBBAGMAdwBCAHcAQQBHAEUAQQBiAGcAQQA5AEEAQwBJAEEATQB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBTAFEAQgB0AEEASABBAEEAYgBBAEIAbABBAEcAMABBAFoAUQBCAHUAQQBIAFEAQQBZAFEAQgB5AEEAQwBBAEEASwBBAEIASgBBAEcAMABBAGMAQQBCAHkAQQBHADgAQQBkAGcAQgBsAEEAQwBrAEEAUABBAEEAdgBBAEgAUQBBAFoAQQBBACsAQQBBAG8AQQBQAEEAQgAwAEEARwBRAEEASQBBAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBQAFEAQQBpAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAbwBBAEkAQQBCAGsAQQBHADgAQQBkAEEAQgAwAEEARwBVAEEAWgBBAEEANwBBAEMAQQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAagBBAEcAOABBAGIAQQBCAHYAQQBIAEkAQQBPAGcAQQBnAEEARwBJAEEAYgBBAEIAMQBBAEcAVQBBAE8AdwBBAGkAQQBDAEEAQQBjAGcAQgB2AEEASABjAEEAYwB3AEIAdwBBAEcARQBBAGIAZwBBADkAQQBDAEkAQQBNAHcAQQBpAEEAQwBBAEEAZAB3AEIAcABBAEcAUQBBAGQAQQBCAG8AQQBEADAAQQBJAGcAQQB5AEEARABBAEEATgBBAEEAaQBBAEQANABBAFMAUQBCAHQAQQBIAEEAQQBiAEEAQgBsAEEARwAwAEEAWgBRAEIAdQBBAEgAUQBBAFkAUQBCAHkAQQBDAEEAQQBZAFEAQQBtAEEARwBNAEEAWQB3AEIAbABBAEcAUQBBAGEAUQBCAHMAQQBEAHMAQQBKAGcAQgB2AEEASABRAEEAYQBRAEIAcwBBAEcAUQBBAFoAUQBBADcAQQBHAFUAQQBjAHcAQQBnAEEARwBNAEEAYgB3AEIAeQBBAEgASQBBAFoAUQBCADAAQQBHAGsAQQBkAGcAQgBoAEEASABNAEEAUABBAEEAdgBBAEgAUQBBAFoAQQBBACsAQQBBAG8AQQBQAEEAQgAwAEEARwBRAEEASQBBAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBQAFEAQQBpAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAbwBBAEkAQQBCAGsAQQBHADgAQQBkAEEAQgAwAEEARwBVAEEAWgBBAEEANwBBAEMAQQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAagBBAEcAOABBAGIAQQBCAHYAQQBIAEkAQQBPAGcAQQBnAEEARwBJAEEAYgBBAEIAMQBBAEcAVQBBAE8AdwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAVQBBAEIAeQBBAEcAOABBAGMAQQBCAHYAQQBIAEkAQQBJAEEAQgBoAEEAQwBZAEEAWQB3AEIAagBBAEcAVQBBAFoAQQBCAHAAQQBHAHcAQQBPAHcAQQBtAEEARwA4AEEAZABBAEIAcABBAEcAdwBBAFoAQQBCAGwAQQBEAHMAQQBaAFEAQgB6AEEAQwBBAEEAYwBBAEIAaABBAEgASQBBAFkAUQBBAGcAQQBHAFUAQQBiAEEAQgBwAEEARwAwAEEAYQBRAEIAdQBBAEcARQBBAGMAZwBBAGcAQQBHAEUAQQBJAEEAQgBqAEEARwBFAEEAZABRAEIAegBBAEcARQBBAEkAQQBCAHkAQQBHAEUAQQBhAFEAQgA2AEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAEkAQQBiAHcAQgAzAEEASABNAEEAYwBBAEIAaABBAEcANABBAFAAUQBBAGkAQQBEAE0AQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAGcAQQB3AEEARABRAEEASQBnAEEAKwBBAEUATQBBAGIAdwBCAHUAQQBIAFEAQQBjAGcAQgB2AEEARwB3AEEAWgBRAEEAZwBBAEcAMABBAFkAUQBCAHUAQQBIAFUAQQBZAFEAQgBzAEEAQwBBAEEAYgB3AEIAMQBBAEMAQQBBAFkAUQBCADEAQQBIAFEAQQBiAHcAQgB0AEEAQwBZAEEAWQBRAEIAaABBAEcATQBBAGQAUQBCADAAQQBHAFUAQQBPAHcAQgAwAEEARwBrAEEAWQB3AEIAdgBBAEQAdwBBAEwAdwBCADAAQQBHAFEAQQBQAGcAQQBLAEEARAB3AEEATAB3AEIAMABBAEgASQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgB5AEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAFEAQQBIAEkAQQBhAFEAQgB2AEEASABJAEEAYQBRAEIANgBBAEcARQBBAGMAZwBBAGcAQQBHAEUAQQBKAGcAQgBqAEEARwBNAEEAWgBRAEIAawBBAEcAawBBAGIAQQBBADcAQQBDAFkAQQBiAHcAQgAwAEEARwBrAEEAYgBBAEIAawBBAEcAVQBBAE8AdwBCAGwAQQBIAE0AQQBJAEEAQgBqAEEARwA4AEEAYwBnAEIAeQBBAEcAVQBBAGQAQQBCAHAAQQBIAFkAQQBZAFEAQgB6AEEAQwBBAEEAWgBRAEEAZwBBAEgAQQBBAGMAZwBCAGwAQQBIAFkAQQBaAFEAQgB1AEEASABRAEEAYQBRAEIAMgBBAEcARQBBAGMAdwBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEMAOABBAGQAQQBCAHkAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAYwBnAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBVAEEAQgBzAEEARwBFAEEAYgBnAEIAbABBAEcAbwBBAFkAUQBCAHkAQQBDAEEAQQBZAFEAQQBtAEEARwBNAEEAWQB3AEIAbABBAEcAUQBBAGEAUQBCAHMAQQBEAHMAQQBKAGcAQgB2AEEASABRAEEAYQBRAEIAcwBBAEcAUQBBAFoAUQBBADcAQQBHAFUAQQBjAHcAQQBnAEEARwBNAEEAYgB3AEIAeQBBAEgASQBBAFoAUQBCADAAQQBHAGsAQQBkAGcAQgBoAEEASABNAEEASQBBAEIAbABBAEMAQQBBAGMAQQBCAHkAQQBHAFUAQQBkAGcAQgBsAEEARwA0AEEAZABBAEIAcABBAEgAWQBBAFkAUQBCAHoAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAEwAdwBCADAAQQBIAEkAQQBQAGcAQQBLAEEARAB3AEEAZABBAEIAeQBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQARQBBAE4AUQBBADEAQQBDAEkAQQBQAGcAQgBEAEEARwA4AEEAYgBnAEIAbQBBAEcAVQBBAGMAZwBCAHAAQQBIAEkAQQBJAEEAQQBvAEEARwBNAEEAYQBBAEIAbABBAEcATQBBAGEAdwBBAHAAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgAYwBBAGEAUQBCAGsAQQBIAFEAQQBhAEEAQQA5AEEAQwBJAEEATQBnAEEAdwBBAEQAUQBBAEkAZwBBACsAQQBGAFkAQQBaAFEAQgB5AEEARwBrAEEAWgBnAEIAcABBAEcATQBBAFkAUQBCAHkAQQBDAEEAQQBiAHcAQgB6AEEAQwBBAEEAYwBnAEIAbABBAEgATQBBAGQAUQBCAHMAQQBIAFEAQQBZAFEAQgBrAEEARwA4AEEAYwB3AEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIARQBBAEQAYwBBAEkAQQBBAHQAQQBDAEEAQQBVAEEAQgB5AEEARwBVAEEAZABnAEIAcABBAEcANABBAGEAUQBCAHkAQQBDAEEAQQBZAFEAQQBnAEEASABJAEEAWgBRAEIAdwBBAEcAVQBBAGQAQQBCAHAAQQBDAFkAQQBZAHcAQgBqAEEARwBVAEEAWgBBAEIAcABBAEcAdwBBAE8AdwBBAG0AQQBHAEUAQQBkAEEAQgBwAEEARwB3AEEAWgBBAEIAbABBAEQAcwBBAGIAdwBBAGcAQQBHAFEAQQBiAHcAQQBnAEEASABBAEEAYwBnAEIAdgBBAEcASQBBAGIAQQBCAGwAQQBHADAAQQBZAFEAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBXAEEARwBVAEEAYwBnAEIAcABBAEcAWQBBAGEAUQBCAGoAQQBHAEUAQQBjAGcAQQBnAEEARwA4AEEAYwB3AEEAZwBBAEgASQBBAFoAUQBCAHoAQQBIAFUAQQBiAEEAQgAwAEEARwBFAEEAWgBBAEIAdgBBAEgATQBBAEkAQQBCAGwAQQBDAEEAQQBjAEEAQgB5AEEARwA4AEEAWQB3AEIAbABBAEgATQBBAGMAdwBCAHYAQQBIAE0AQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBRAHcAQgB2AEEARwA0AEEAZABBAEIAeQBBAEcAOABBAGIAQQBCAGgAQQBIAEkAQQBJAEEAQQBvAEEARwBNAEEAYgB3AEIAdQBBAEgAUQBBAGMAZwBCAHYAQQBHAHcAQQBLAFEAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBXAEEARwBVAEEAYwBnAEIAcABBAEcAWQBBAGEAUQBCAGoAQQBHAEUAQQBjAGcAQQBnAEEARwA4AEEAYwB3AEEAZwBBAEgASQBBAFoAUQBCAHoAQQBIAFUAQQBiAEEAQgAwAEEARwBFAEEAWgBBAEIAdgBBAEgATQBBAEkAQQBCAGwAQQBDAEEAQQBjAEEAQgB5AEEARwA4AEEAWQB3AEIAbABBAEgATQBBAGMAdwBCAHYAQQBIAE0AQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGQAdwBCAHAAQQBHAFEAQQBkAEEAQgBvAEEARAAwAEEASQBnAEEAeQBBAEQAQQBBAE4AQQBBAGkAQQBEADQAQQBWAGcAQgBsAEEASABJAEEAYQBRAEIAbQBBAEcAawBBAFkAdwBCAGgAQQBIAEkAQQBJAEEAQgBoAEEASABNAEEASQBBAEIAaABBAEMAWQBBAFkAdwBCAGoAQQBHAFUAQQBaAEEAQgBwAEEARwB3AEEATwB3AEEAbQBBAEcAOABBAGQAQQBCAHAAQQBHAHcAQQBaAEEAQgBsAEEARABzAEEAWgBRAEIAegBBAEMAQQBBAFkAdwBCAHYAQQBIAEkAQQBjAGcAQgBsAEEASABRAEEAYQBRAEIAMgBBAEcARQBBAGMAdwBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAMwBBAEcAawBBAFoAQQBCADAAQQBHAGcAQQBQAFEAQQBpAEEARABJAEEATQBBAEEAMABBAEMASQBBAFAAZwBCAFAAQQBHAEkAQQBjAHcAQgBsAEEASABJAEEAZABnAEIAaABBAEMAWQBBAFkAdwBCAGoAQQBHAFUAQQBaAEEAQgBwAEEARwB3AEEATwB3AEEAbQBBAEcAOABBAGQAQQBCAHAAQQBHAHcAQQBaAEEAQgBsAEEARABzAEEAWgBRAEIAegBBAEMAQQBBAFoAUQBBAGcAQQBHAGMAQQBjAGcAQQBtAEEARwBFAEEAWQBRAEIAagBBAEgAVQBBAGQAQQBCAGwAQQBEAHMAQQBaAGcAQgBwAEEARwBNAEEAYgB3AEEAZwBBAEcAUQBBAFoAUQBBAGcAQQBHAFkAQQBjAGcAQgBsAEEASABFAEEAZABRAEEAbQBBAEcAVQBBAFkAdwBCAHAAQQBIAEkAQQBZAHcAQQA3AEEARwA0AEEAWQB3AEIAcABBAEcARQBBAEkAQQBCAGsAQQBHAFUAQQBJAEEAQgB3AEEASABJAEEAYgB3AEIAaQBBAEcAdwBBAFoAUQBCAHQAQQBHAEUAQQBjAHcAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBDADgAQQBkAEEAQgB5AEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAGMAZwBBACsAQQBBAG8AQQBQAEEAQgAwAEEARwBRAEEASQBBAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBQAFEAQQBpAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAbwBBAEkAQQBCAGsAQQBHADgAQQBkAEEAQgAwAEEARwBVAEEAWgBBAEEANwBBAEMAQQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAagBBAEcAOABBAGIAQQBCAHYAQQBIAEkAQQBPAGcAQQBnAEEARwBJAEEAYgBBAEIAMQBBAEcAVQBBAE8AdwBBAGkAQQBDAEEAQQBjAGcAQgB2AEEASABjAEEAYwB3AEIAdwBBAEcARQBBAGIAZwBBADkAQQBDAEkAQQBNAGcAQQBpAEEAQwBBAEEAZAB3AEIAcABBAEcAUQBBAGQAQQBCAG8AQQBEADAAQQBJAGcAQQB4AEEARABVAEEATgBRAEEAaQBBAEQANABBAFEAUQBCAHEAQQBIAFUAQQBjAHcAQgAwAEEARwBFAEEAYwBnAEEAOABBAEMAOABBAGQAQQBCAGsAQQBEADQAQQBDAGcAQQA4AEEASABRAEEAWgBBAEEAZwBBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA5AEEAQwBJAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAE8AZwBBAGcAQQBHAFEAQQBiAHcAQgAwAEEASABRAEEAWgBRAEIAawBBAEQAcwBBAEkAQQBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEcATQBBAGIAdwBCAHMAQQBHADgAQQBjAGcAQQA2AEEAQwBBAEEAWQBnAEIAcwBBAEgAVQBBAFoAUQBBADcAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIAUQBBAEcARQBBAFoAQQBCAHkAQQBHADgAQQBiAGcAQgBwAEEASABvAEEAWQBRAEIAeQBBAEMAQQBBAGIAdwBCAHoAQQBDAEEAQQBjAEEAQgB5AEEARwA4AEEAWQB3AEIAbABBAEgATQBBAGMAdwBCAHYAQQBIAE0AQQBQAEEAQQB2AEEASABRAEEAWgBBAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBHAFEAQQBJAEEAQgB6AEEASABRAEEAZQBRAEIAcwBBAEcAVQBBAFAAUQBBAGkAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARABvAEEASQBBAEIAawBBAEcAOABBAGQAQQBCADAAQQBHAFUAQQBaAEEAQQA3AEEAQwBBAEEAWQBnAEIAdgBBAEgASQBBAFoAQQBCAGwAQQBIAEkAQQBMAFEAQgBqAEEARwA4AEEAYgBBAEIAdgBBAEgASQBBAE8AZwBBAGcAQQBHAEkAQQBiAEEAQgAxAEEARwBVAEEATwB3AEEAaQBBAEMAQQBBAGMAZwBCAHYAQQBIAGMAQQBjAHcAQgB3AEEARwBFAEEAYgBnAEEAOQBBAEMASQBBAE0AZwBBAGkAQQBDAEEAQQBkAHcAQgBwAEEARwBRAEEAZABBAEIAbwBBAEQAMABBAEkAZwBBAHkAQQBEAEEAQQBOAEEAQQBpAEEARAA0AEEAUgBBAEEANABBAEMAQQBBAEwAUQBBAGcAQQBFAE0AQQBiAHcAQgB1AEEARwBjAEEAYwBnAEIAaABBAEgAUQBBAGQAUQBCAHMAQQBHAEUAQQBjAGcAQQBnAEEARwBFAEEASQBBAEIAbABBAEgARQBBAGQAUQBCAHAAQQBIAEEAQQBaAFEAQQA4AEEAQwA4AEEAZABBAEIAawBBAEQANABBAEMAZwBBADgAQQBIAFEAQQBaAEEAQQBnAEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADkAQQBDAEkAQQBZAGcAQgB2AEEASABJAEEAWgBBAEIAbABBAEgASQBBAEwAUQBCAHoAQQBIAFEAQQBlAFEAQgBzAEEARwBVAEEATwBnAEEAZwBBAEcAUQBBAGIAdwBCADAAQQBIAFEAQQBaAFEAQgBrAEEARABzAEEASQBBAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEARwBNAEEAYgB3AEIAcwBBAEcAOABBAGMAZwBBADYAQQBDAEEAQQBZAGcAQgBzAEEASABVAEEAWgBRAEEANwBBAEMASQBBAEkAQQBCAHkAQQBHADgAQQBkAHcAQgB6AEEASABBAEEAWQBRAEIAdQBBAEQAMABBAEkAZwBBAHkAQQBDAEkAQQBJAEEAQgAzAEEARwBrAEEAWgBBAEIAMABBAEcAZwBBAFAAUQBBAGkAQQBEAEkAQQBNAEEAQQAwAEEAQwBJAEEAUABnAEIAUQBBAEcARQBBAFoAQQBCAHkAQQBHADgAQQBiAGcAQgBwAEEASABvAEEAWQBRAEIAeQBBAEMAQQBBAGIAdwBBAGcAQQBIAEEAQQBjAGcAQgB2AEEARwBNAEEAWgBRAEIAegBBAEgATQBBAGIAdwBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAeQBBAEcAOABBAGQAdwBCAHoAQQBIAEEAQQBZAFEAQgB1AEEARAAwAEEASQBnAEEAeQBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBEAEEARwA4AEEAYgBnAEIAMABBAEgASQBBAGIAdwBCAHMAQQBHAEUAQQBjAGcAQQBnAEEAQwBnAEEAWQB3AEIAdgBBAEcANABBAGQAQQBCAHkAQQBHADgAQQBiAEEAQQBwAEEARAB3AEEATAB3AEIAMABBAEcAUQBBAFAAZwBBAEsAQQBEAHcAQQBkAEEAQgBrAEEAQwBBAEEAYwB3AEIAMABBAEgAawBBAGIAQQBCAGwAQQBEADAAQQBJAGcAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEANgBBAEMAQQBBAFoAQQBCAHYAQQBIAFEAQQBkAEEAQgBsAEEARwBRAEEATwB3AEEAZwBBAEcASQBBAGIAdwBCAHkAQQBHAFEAQQBaAFEAQgB5AEEAQwAwAEEAWQB3AEIAdgBBAEcAdwBBAGIAdwBCAHkAQQBEAG8AQQBJAEEAQgBpAEEARwB3AEEAZABRAEIAbABBAEQAcwBBAEkAZwBBAGcAQQBIAEkAQQBiAHcAQgAzAEEASABNAEEAYwBBAEIAaABBAEcANABBAFAAUQBBAGkAQQBEAEkAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAGcAQQB3AEEARABRAEEASQBnAEEAKwBBAEYAQQBBAFkAUQBCAGsAQQBIAEkAQQBiAHcAQgB1AEEARwBrAEEAZQBnAEIAaABBAEgASQBBAEkAQQBCAHYAQQBDAEEAQQBjAEEAQgB5AEEARwA4AEEAWQB3AEIAbABBAEgATQBBAGMAdwBCAHYAQQBEAHcAQQBMAHcAQgAwAEEARwBRAEEAUABnAEEASwBBAEQAdwBBAGQAQQBCAGsAQQBDAEEAQQBjAHcAQgAwAEEASABrAEEAYgBBAEIAbABBAEQAMABBAEkAZwBCAGkAQQBHADgAQQBjAGcAQgBrAEEARwBVAEEAYwBnAEEAdABBAEgATQBBAGQAQQBCADUAQQBHAHcAQQBaAFEAQQA2AEEAQwBBAEEAWgBBAEIAdgBBAEgAUQBBAGQAQQBCAGwAQQBHAFEAQQBPAHcAQQBnAEEARwBJAEEAYgB3AEIAeQBBAEcAUQBBAFoAUQBCAHkAQQBDADAAQQBZAHcAQgB2AEEARwB3AEEAYgB3AEIAeQBBAEQAbwBBAEkAQQBCAGkAQQBHAHcAQQBkAFEAQgBsAEEARABzAEEASQBnAEEAZwBBAEgASQBBAGIAdwBCADMAQQBIAE0AQQBjAEEAQgBoAEEARwA0AEEAUABRAEEAaQBBAEQASQBBAEkAZwBBAGcAQQBIAGMAQQBhAFEAQgBrAEEASABRAEEAYQBBAEEAOQBBAEMASQBBAE0AZwBBAHcAQQBEAFEAQQBJAGcAQQArAEEARQBFAEEAYgBnAEIAaABBAEcAdwBBAGEAUQBCAHoAQQBHAEUAQQBjAGcAQQBnAEEARwA4AEEASQBBAEIAagBBAEgAVQBBAGMAdwBCADAAQQBHADgAQQBJAEEAQgA0AEEAQwBBAEEAWQBnAEIAbABBAEcANABBAFoAUQBCAG0AQQBDAFkAQQBhAFEAQgBoAEEARwBNAEEAZABRAEIAMABBAEcAVQBBAE8AdwBCAGoAQQBHAGsAQQBiAHcAQQBnAEEARwBRAEEAWQBRAEIAegBBAEMAQQBBAFkAUQBBAG0AQQBHAE0AQQBZAHcAQgBsAEEARwBRAEEAYQBRAEIAcwBBAEQAcwBBAEoAZwBCAHYAQQBIAFEAQQBhAFEAQgBzAEEARwBRAEEAWgBRAEEANwBBAEcAVQBBAGMAdwBBADgAQQBDADgAQQBkAEEAQgBrAEEARAA0AEEAQwBnAEEAOABBAEgAUQBBAFoAQQBBAGcAQQBIAE0AQQBkAEEAQgA1AEEARwB3AEEAWgBRAEEAOQBBAEMASQBBAFkAZwBCAHYAQQBIAEkAQQBaAEEAQgBsAEEASABJAEEATABRAEIAegBBAEgAUQBBAGUAUQBCAHMAQQBHAFUAQQBPAGcAQQBnAEEARwBRAEEAYgB3AEIAMABBAEgAUQBBAFoAUQBCAGsAQQBEAHMAQQBJAEEAQgBpAEEARwA4AEEAYwBnAEIAawBBAEcAVQBBAGMAZwBBAHQAQQBHAE0AQQBiAHcAQgBzAEEARwA4AEEAYwBnAEEANgBBAEMAQQBBAFkAZwBCAHMAQQBIAFUAQQBaAFEAQQA3AEEAQwBJAEEASQBBAEIAeQBBAEcAOABBAGQAdwBCAHoAQQBIAEEAQQBZAFEAQgB1AEEARAAwAEEASQBnAEEAeQBBAEMASQBBAEkAQQBCADMAQQBHAGsAQQBaAEEAQgAwAEEARwBnAEEAUABRAEEAaQBBAEQASQBBAE0AQQBBADAAQQBDAEkAQQBQAGcAQgBKAEEARwA0AEEAYwB3AEIAMABBAEgASQBBAGQAUQBBAG0AQQBHAE0AQQBZAHcAQgBsAEEARwBRAEEAYQBRAEIAcwBBAEQAcwBBAEoAZwBCAGgAQQBIAFEAQQBhAFEAQgBzAEEARwBRAEEAWgBRAEEANwBBAEcAOABBAEkAQQBCAGsAQQBHAFUAQQBJAEEAQgAwAEEASABJAEEAWQBRAEIAaQBBAEcARQBBAGIAQQBCAG8AQQBHADgAQQBMAEEAQQBnAEEASABRAEEAYwBnAEIAbABBAEcAawBBAGIAZwBCAGgAQQBHADAAQQBaAFEAQgB1AEEASABRAEEAYgB3AEEAZwBBAEcAUQBBAFoAUQBBAGcAQQBHAFUAQQBjAFEAQgAxAEEARwBrAEEAYwBBAEIAbABBAEMAdwBBAEkAQQBCAFEAQQBGAEkAQQBUAHcAQgB6AEEAQwA0AEEAUABBAEEAdgBBAEgAUQBBAFoAQQBBACsAQQBBAG8AQQBQAEEAQQB2AEEASABRAEEAYwBnAEEAKwBBAEEAbwBBAFAAQQBCADAAQQBIAEkAQQBQAGcAQQBLAEEARAB3AEEAZABBAEIAawBBAEMAQQBBAGMAdwBCADAAQQBIAGsAQQBiAEEAQgBsAEEARAAwAEEASQBnAEIAaQBBAEcAOABBAGMAZwBCAGsAQQBHAFUAQQBjAGcAQQB0AEEASABNAEEAZABBAEIANQBBAEcAdwBBAFoAUQBBADYAQQBDAEEAQQBaAEEAQgB2AEEASABRAEEAZABBAEIAbABBAEcAUQBBAE8AdwBBAGcAQQBHAEkAQQBiAHcAQgB5AEEARwBRAEEAWgBRAEIAeQBBAEMAMABBAFkAdwBCAHYAQQBHAHcAQQBiAHcAQgB5AEEARABvAEEASQBBAEIAaQBBAEcAdwBBAGQAUQBCAGwAQQBEAHMAQQBJAGcAQQBnAEEASABjAEEAYQBRAEIAawBBAEgAUQBBAGEAQQBBADkAQQBDAEkAQQBNAGcAQQB3AEEARABRAEEASQBnAEEAKwBBAEUATQBBAGIAdwBCAHUAQQBHAE0AQQBiAEEAQgAxAEEARwBrAEEAYwBnAEEAZwBBAEcARQBBAEkAQQBCAHQAQQBHAFUAQQBiAEEAQgBvAEEARwA4AEEAYwBnAEIAcABBAEcARQBBAFAAQQBBAHYAQQBIAFEAQQBaAEEAQQArAEEAQQBvAEEAUABBAEEAdgBBAEgAUQBBAGMAZwBBACsAQQBBAG8AQQBQAEEAQQB2AEEASABRAEEAWQBnAEIAdgBBAEcAUQBBAGUAUQBBACsAQQBBAG8AQQBQAEEAQQB2AEEASABRAEEAWQBRAEIAaQBBAEcAdwBBAFoAUQBBACsAQQBBAD0APQAKAHMAdQBmAGYAaQB4ADoA:31b8e172-b470-440e-83d8-e6b185028602</p>
+<p>
+<p><strong>PDCA</strong>: Também conhecido como ciclo de Deming ou Shewhart, o método PDCA busca a melhoria contínua de produtos e processos, identificando as possíveis causas de seus problemas e implementando soluções.</p>
+</p>
+<p>
+<p><strong>MASP</strong>: É uma abreviatura usada para o Método de Análise e Soluções de Problemas é a denominação que o <i>QC-Story</i>. Trata-se de um roteiro para manter, controlar e aperfeiçoar a qualidade de produtos e processos passando pela verificação do resultado da solução e, finalmente, geração e disseminação de aprendizado decorrido de sua aplicação.</p>
+</p>
+<p>
+<p><strong>8D</strong>: A metodologia das oito disciplinas foi melhorada pela Ford Motor Company nos anos 80, visando a identificação, correção e eliminação da repetição de problemas de produtos e processos.</p>
+</p>
+<p>
+<p><strong>A3</strong>: Método desenvolvido pela Toyota Motor Corporation que estabelece uma estrutura para propor soluções para os problemas, fornecer relatórios da situação de projetos em andamento e relatar as atividades de coleta de informações.</p>
+</p>
+<p>
+<p><strong>DMAIC</strong>: Metodologia para redução de defeitos do programa Seis Sigma, o DMAIC é um ciclo de desenvolvimento, caracterizado pela utilização intensiva de técnicas estatísticas, utilizado em projetos de aumento de produtividade, redução de custos, melhoria de processos administrativos, dentre outras aplicações.</p>
+</p>
+<p>
+<p><strong>FTA</strong>: Método da Análise da Árvore de Falhas, traduzido do inglês “Fault Tree Analysis – FTA” foi desenvolvido por volta de 1960, por W.A. Watson, da empresa Bell Laboratories e aperfeiçoada pela Boeing Corporation. Sua metodologia é dedutiva e estruturada em termos de eventos, ao invés de componentes, que tem por objetivo melhorar a confiabilidade em geral de produtos e de processos por meio da relação lógica entre falhas primárias e falha final do produto buscando assim a resolução de problemas.</p>
+</p>
+<p>
+<p><strong>RCA</strong>: A Análise de Causa Raiz (ACR) ou traduzido do inglês “Root Cause Analysis – RCA” é um método para o uso investigativo na identificação da causa raiz de um evento, o qual pode ser com segurança, saúde, meio ambiente, qualidade e impactos na produção.</p>
+</p>
+<p>
+<p> </p>
+</p>
+<p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Processo_PDSA.png?1599658401627"/></p>
+</p>
+<p>
+<p> </p>
+</p>
+<p style="text-align: right;">
+<p><span style="font-size: 8pt;">Fontes:</span><a href="https://www.gradusct.com.br/masp/">https://www.gradusct.com.br/masp/</a>, <a href="https://www.telios.eng.br/">https://www.telios.eng.br/</a></p>
+</p>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/wy1Rb6sGH8s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/Ac87j3kSNXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/61LrHLFNN48" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/cQxP8GoTVOw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/OlRolrgowj8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/09ckHGdz88I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="560" height="314" src="https://www.youtube.com/embed/gKIzsN31rQ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div id="masp-e-pdca" class="section level5">
+<h5>MASP e PDCA</h5>
+<p><img src="img/masp3.png" width="120%" /></p>
+<p><img src="img/masp2.png" width="120%" /></p>
+<p><img src="img/masp.png" width="120%" /></p>
+</div>
+</div>
+<div id="checkpoint-5" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 26/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/assignments/16594014?module_item_id=37322356">Checkpoint 6</a></p>
+</div>
+<div id="tarefa-preliminar-5" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 29/09/2020</p>
+<p><a href="https://canvas.instructure.com/courses/2212314/quizzes/5859818?module_item_id=35344632">Tarefa preliminar 6</a></p>
+<hr>
+</div>
+</div>
+<div id="semanas-7-8-e-9-ferramentas-da-qualidade" class="section level2">
+<h2>Semanas 7, 8 e 9: Ferramentas da qualidade</h2>
+<div id="documentação-6" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<ul>
+<li>Folha de verificação</li>
+<li>Estratificação</li>
+<li>Gráfico de Pareto</li>
+<li>Diagrama de causa e efeito</li>
+<li>Histograma</li>
+<li>Fluxograma</li>
+<li>Diagrama de dispersão</li>
+<li>Gráficos de controle</li>
+<li>O ciclo PDCA</li>
+<li>Brainstorming</li>
+<li>5S</li>
+<li>5W</li>
+<li>5W2H</li>
+</ul>
+<p><img src="img/qualidade_ferramentas.jpg" width="120%" /></p>
+<div id="ferramentas-da-qualidade-e-o-uso-do-r" class="section level5">
+<h5>Ferramentas da qualidade e o uso do <code>R</code></h5>
+<p>Várias empresas estão usando R como software analítico. Por ser uma plataforma FOSS, tem uma comunidade ampla de colaboração.</p>
+<p>Para saber um pouco mais, consulte <a href="https://www.rpubs.com/adriplebe/Utilizacao_do_R_para_Controle_da_Qualidade">Utilização do R para Controle da Qualidade por Adriano Puglia</a></p>
+<p>O Adriano Puglia foi gentil e compartilhou seu conhecimento sobre como implementar no <code>R</code> as ferramentas de qualidade. Vou fazer uma síntese aqui, mas sua página, com maior detalhamento, pode ser acessada em <a href="https://www.rpubs.com/adriplebe/R_e_as_Ferramentas_da_Qualidade">R e as ferramentas da qualidade</a>.</p>
+<p>Como o <code>R</code> é baseado em pacotes que incluem funções para diferentes implementações, precisaremos de um package para gerar as ferramentas de qualidade com mais facilidade. Existem diferentes packages, mas seguiremos um único tutorial para facilitar a nossa vida. Para tanto, utilizaremos os pacotes <code>qcc</code> e <code>SixSigma</code>, ambos disponíveis no CRAN para download e instalação.</p>
+<p>Começaremos pela construção de <strong>diagramas de causa e efeito (pacote <code>qcc</code>)</strong></p>
+<p>Precisamos instalar o package e chamar sua biblioteca por meio dos comandos a seguir.</p>
+<pre class="r"><code># install.packages(&quot;qcc&quot;)  #Instalando o pacote
+library(qcc) #Carregando o pacote para uso das funções.  </code></pre>
+<p>Existe uma função específica para geração do diagrama de Ishikawa por meio desse pacote, denominada <code>cause.and.effect</code>. Precisamos estruturar a informação para que possa ser carregada na estrutura do diagrama. Assim:</p>
+<pre class="r"><code>cause.and.effect(cause=list(Medidas=c(&quot;Micrometers&quot;, &quot;Microscopes&quot;, &quot;Inspectors&quot;),
+                            Materiais=c(&quot;Alloys&quot;, &quot;Lubricants&quot;, &quot;Suppliers&quot;),
+                            Pessoal=c(&quot;Shifts&quot;, &quot;Supervisors&quot;, &quot;Training&quot;, &quot;Operators&quot;),
+                            Ambiente=c(&quot;Condensation&quot;, &quot;Moisture&quot;),
+                            Métodos=c(&quot;Brake&quot;, &quot;Engager&quot;, &quot;Angle&quot;),
+                            Máquinas=c(&quot;Speed&quot;, &quot;Lathes&quot;, &quot;Bits&quot;, &quot;Sockets&quot;)),
+                 effect=&quot;Falhas na superfície&quot;)</code></pre>
+<p><img src="qualidade_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Lembrando que informações sobre a parametrização das funções pode ser encontrada no help e que as informações sobre o processo são compostas por objetos que combinam (função <code>c()</code>) valores em cada ramo das dimensões das possíveis causas primárias (Métodos, Máquinas, Mão de Obra, Material, Medidas, Meio Ambiente).</p>
+<p><strong>Folha de verificação</strong></p>
+<p>O tipo mais simples de folha de verificação é a folha de registro, por meio da qual são registradas marcas cada vez que o evento ocorre. A coleta desse tipo de informação, estratificada conforme fatores operacionais (turno de trabalho, tipo de ocorrência, responsável, dentre outros) pode ser realizada tanto com o objetivo de entender o processo em um primeiro momento como depois de algumas explorações dos eventos por meio de outras ferramentas da qualidade, como pareto, histogramas e o diagrama de causa e efeito.</p>
+<pre class="r"><code>folha_verificacao &lt;- rbind(data.frame(group=&quot;Métodos&quot;, cause= c(&quot;recepção de materia prima&quot;, &quot;Método de transporte&quot;)),
+                            data.frame(group=&quot;Máquinas&quot;, cause=&quot;compressor&quot;),
+                            data.frame(group=&quot;Mão_de_obra&quot;, cause=&quot;recepcionista&quot;),
+                            data.frame(group=&quot;Material&quot;, cause=&quot;fornecedor&quot;),
+                            data.frame(group=&quot;Medidas&quot;, cause=&quot;método de medição&quot;),
+                            data.frame(group=&quot;Meio_ambiente&quot;, cause=&quot;ventilação&quot;))
+
+folha_verificacao$Inspetor_A &lt;- NA 
+folha_verificacao$Inspetor_B &lt;- NA
+folha_verificacao$Inspetor_C &lt;- NA</code></pre>
+<p>As causas levantadas agora serão investigadas por uma equipe contendo 3 inspetores. Inspetor A, Inspetor B e Inspetor C. Durante a semana nos horário de intensa produção os inspetores coletaram as seguintes informações:</p>
+<pre class="r"><code>folha_verificacao$Inspetor_A &lt;- c(0, 0, 4, 3, 2, 0, 2)
+
+folha_verificacao$Inspetor_B &lt;- c(0, 0, 5, 3, 2, 0, 2)
+
+folha_verificacao$Inspetor_C &lt;- c(0, 0, 6, 4, 3, 0, 2)
+
+folha_verificacao$total &lt;- folha_verificacao$Inspetor_A + 
+  folha_verificacao$Inspetor_B + 
+  folha_verificacao$Inspetor_C
+
+folha_verificacao</code></pre>
+<pre><code>##           group                     cause Inspetor_A Inspetor_B Inspetor_C
+## 1       Métodos recepção de materia prima          0          0          0
+## 2       Métodos      Método de transporte          0          0          0
+## 3      Máquinas                compressor          4          5          6
+## 4   Mão_de_obra             recepcionista          3          3          4
+## 5      Material                fornecedor          2          2          3
+## 6       Medidas         método de medição          0          0          0
+## 7 Meio_ambiente                ventilação          2          2          2
+##   total
+## 1     0
+## 2     0
+## 3    15
+## 4    10
+## 5     7
+## 6     0
+## 7     6</code></pre>
+<p>Estatísticas descritivas básicas:</p>
+<pre><code>##            metodos_recepcao_materia_prima metodos_transporte
+## Inspetor_A                              0                  0
+## Inspetor_B                              0                  0
+## Inspetor_C                              0                  0
+## total                                   0                  0
+##            maquinas_compressor maodeobra_recepcionista material_fornecedor
+## Inspetor_A                   4                       3                   2
+## Inspetor_B                   5                       3                   2
+## Inspetor_C                   6                       4                   3
+## total                       15                      10                   7
+##            medidas_metodo meio_ambiente_ventilacao
+## Inspetor_A              0                        2
+## Inspetor_B              0                        2
+## Inspetor_C              0                        2
+## total                   0                        6</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0       0       0       0       0       0</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0       0       0       0       0       0</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.00    4.75    5.50    7.50    8.25   15.00</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     3.0     3.0     3.5     5.0     5.5    10.0</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     2.0     2.0     2.5     3.5     4.0     7.0</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0       0       0       0       0       0</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       2       2       2       3       3       6</code></pre>
+<p><img src="qualidade_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="qualidade_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="qualidade_files/figure-html/unnamed-chunk-12-3.png" width="672" /><img src="qualidade_files/figure-html/unnamed-chunk-12-4.png" width="672" /><img src="qualidade_files/figure-html/unnamed-chunk-12-5.png" width="672" /></p>
+<p><strong>Pareto</strong></p>
+<p>Os diagramas de causa e efeito e os dados das folhas de verificação são geralmente representados usando gráficos de Pareto. Esses tipos de gráficos plotam barras classificadas (da barra mais alta à barra mais curta) representando a variável medida, nesse caso, as contagens de causas plausíveis de um efeito.</p>
+<p>Vamos utilizar a função <code>pareto.chart</code> do pacote <code>qcc</code>.</p>
+<pre class="r"><code>library(qcc)
+
+Par_Causas_Pri &lt;- (folha_verificacao$Inspetor_A)
+names(Par_Causas_Pri) &lt;- folha_verificacao$group
+
+G_Par_Causas_Pri &lt;- pareto.chart(Par_Causas_Pri)</code></pre>
+<p><img src="qualidade_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+<div id="checkpoint-6" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 17/10/2020</p>
+</div>
+<div id="tarefa-preliminar-6" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>Não houve tarefa preliminar essa semana</p>
+<hr>
+</div>
+</div>
+<div id="semana-10-ferramentas-da-qualidade---atividade-complementar" class="section level2">
+<h2>Semana 10: Ferramentas da qualidade - atividade complementar</h2>
+<div id="documentação-7" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p><a href="https://rpubs.com/retaoliveira/qua2">Dashboard</a></p>
+<p><a href="https://cefetmgbr-my.sharepoint.com/:x:/g/personal/renataoliveira_cefetmg_br/EWOq1NJliv5NvK_lyL6m3UMBOMeVz4Xw0wLrfj1y9ww74A?e=dIO9hy">Dados com tratamento e variáveis adicionais</a></p>
+</div>
+<div id="checkpoint-7" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 27/10/2020 <a href="https://canvas.instructure.com/courses/2212314/assignments/18361366?module_item_id=38601626">Link</a></p>
+</div>
+<div id="tarefa-preliminar-7" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 27/10/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/6321888?module_item_id=38601594">Link</a></p>
+<hr />
+</div>
+</div>
+<div id="semana-11-quality-function-deployment-qfd" class="section level2">
+<h2>Semana 11: Quality Function Deployment (QFD)</h2>
+<div id="documentação-8" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p>Objetivo: traduzir para termos técnicos a demanda do cliente</p>
+<p>QFD é uma ferramenta de tradução da voz do cliente em expressões técnicas para engenharia desenvolver processos</p>
+<p>Empresa tradicional - Entregar o que o cliente precisa<br />
+- Empresa define o que deve ser feito<br />
+- 80% satisfação</p>
+<p>QFD - pesquisa de mercado<br />
+- desdobramento em departamentos<br />
+- 90/95% de satisfação</p>
+<p><img src="img/111.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><img src="img/112.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>A casa da qualidade - House of Quality</strong></p>
+<p>Esquerdo - voz do cliente<br />
+Superior - tradução - especificações técnicas<br />
+Direita - avaliação competitiva - benchmarking<br />
+Inferior - Quanto - para cada especificação do projeto</p>
+<p><img src="img/24.png" width="70%" style="display: block; margin: auto;" /></p>
+<hr />
+<p><strong>Matrizes</strong></p>
+<p><img src="img/19.png" width="100%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: decimal">
+<li>Matriz do planejamento do produto - características e desdobramentos<br />
+</li>
+<li>Matriz de componentes críticos para execução<br />
+</li>
+<li>Planejamento dos processos, relacionando-os às características principais dos produtos e dos componentes<br />
+</li>
+<li>Planejamento da fabricação - parâmetros para controle de produtos e processos.</li>
+</ol>
+<hr />
+<p><strong>Estrutura de desdobramento da função da qualidade nas 4 matrizes</strong></p>
+<p>Para cada matriz, existe o envolvimento de novas áreas da organização - Clientes, marketing e vendas<br />
+- Produto<br />
+- Engenharia de processo<br />
+- Engenharia de manufatura</p>
+<blockquote>
+<p>Olhar sistêmico e alinhamento de diversas áreas das organizações, antecipando problemas na produção ou nas mãos dos clientes</p>
+</blockquote>
+<hr />
+<p><strong>As 4 casas da qualidade do QFD permitem integração entre clientes, P&amp;D&amp;I, desenvolvimento de produto e manufatura.</strong></p>
+<ul>
+<li><p>Conceitos gerais…</p>
+<ul>
+<li>Escala Likert na avaliação competitiva<br />
+</li>
+<li>Dificuldades organizacionais: limitações e processos sem investimento em capacidade<br />
+</li>
+<li>Correlação: relações entre as expressões técnicas<br />
+</li>
+<li>Avaliação competitiva: comparação com concorrentes<br />
+</li>
+<li>Importância absoluta e relativa: grau de importância.</li>
+</ul></li>
+</ul>
+<hr />
+<ul>
+<li><p>Exemplo: cliente no supermercado</p>
+<ul>
+<li><p>Matriz 1 - Planejamento: Desejos e necessidades dos clientes</p></li>
+<li><p>Matriz 2 - Componentes: corredores, setores e gôndolas</p></li>
+<li><p>Matriz 3 - Planejamento de processo: abastecimento, manuseio de mercadorias</p></li>
+<li><p>Matriz 4 - Planejamento da produção: detalhar fluxo de processos e observar o que controlar em relação ao processo (parâmetros) e produtos (características) gerenciamento por processos.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="checkpoint-8" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 03/11/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/6349934?module_item_id=38759168">Link</a></p>
+</div>
+<div id="tarefa-preliminar-8" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 03/11/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/6349935?module_item_id=38759160">Link</a></p>
+<hr />
+</div>
+</div>
+<div id="semana-12-fmea-e-gut" class="section level2">
+<h2>Semana 12: FMEA e GUT</h2>
+<div id="documentação-9" class="section level4">
+<h4><strong>Documentação</strong></h4>
+</div>
+<div id="checkpoint-9" class="section level4">
+<h4><strong>Checkpoint</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 07/11/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/6393554?module_item_id=39004119">Link</a></p>
+</div>
+<div id="tarefa-preliminar-9" class="section level4">
+<h4><strong>Tarefa preliminar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 07/11/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/5859817?module_item_id=39003241">Link</a></p>
+<hr />
+</div>
+</div>
+<div id="semana-13-controle-estatístico-de-processos-cep" class="section level2">
+<h2>Semana 13: Controle Estatístico de Processos (CEP)</h2>
+<div id="documentação-10" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p><strong>Controle estatístico de processos</strong></p>
+<p><img src="img/cep.png" width="475" /></p>
+<p><img src="img/cep_var.jpg" width="319" /></p>
+<p><strong>Variações e o CEP</strong></p>
+<p><img src="img/Imagem1.png" width="359" /></p>
+<p><strong>Controle estatístico de processos</strong></p>
+<p>Os princípios do CEP fundamentam-se em:</p>
+<ul>
+<li>pensar e decidir com base em fatos</li>
+<li>pensar separando a causa do efeito</li>
+<li>compreender a variabilidade do sistema de produção</li>
+<li>usar raciocínio de prioridade (Pareto)</li>
+<li>utilizar re forma permanente os ciclos de controle e melhoria de processos</li>
+<li>definir o próximo processo ou etapa como cliente da anterior e o cliente deve determinar a qualidade esperada</li>
+<li>identificar, por vezes de maneira antecipada, os focos e locais onde problemas estão ocorrendo</li>
+<li>educar, treinar e organizar a mão de obra para administração participativa e autocontrole dos processos</li>
+</ul>
+<p><strong>Técnicas de apoio</strong> - Amostragem - Folha de verificação - Histograma - Gráficos sequenciais - Diagrama de Pareto - Diagrama de causa e efeito - Estratificação - Gráficos de controle (ou cartas de controle ou Gráficos de Shewhart) - Diagrama de correlação</p>
+<p><strong>Variações e o CEP</strong> Variação total = variação aleatória + variação controlável</p>
+<p><strong>O Controle Estatístico de Processos (CEP) caracteriza-se por:</strong> - redução da variabilidade em medidas; - exatidão em alcançar metas!</p>
+<p><strong>Ações sobre o processo</strong></p>
+<p><strong><em>Mudanças nas operações</em></strong></p>
+<ul>
+<li>Treinamento para os operadores;</li>
+<li>Mudanças nos materiais que entram</li>
+</ul>
+<p><strong><em>Mudanças nos elementos mais básicos do processo</em></strong> - Equipamento; - A comunicação entre as pessoas; - O projeto do processo como um todo - que pode estar vulnerável às mudanças de temperatura ou umidade.</p>
+<p><strong>Ciclo da metodologia científica aplicado ao CEP</strong> 1. identificação da problemática e o planejamento de experimentos com a escolha adequada dos instrumentos de análise 2. experimentação 3. análise de dados 4. reação dos gestores para melhoria do processo</p>
+<p><strong>Gráficos de controle</strong></p>
+<p><strong><em>Principais objetivos de gráficos de controle:</em></strong> 1. Estimar os parâmetros do processo no cenário de controle estatístico, permitindo analisar sua capacidade; 2. Monitorar parâmetros da produção ao longo do tempo; 3. Sinalizar a ocorrência de causas de variação atribuíveis; 4. Reduzir a variabilidade do processo mediante eliminação das causas atribuíveis.</p>
+<p><strong>Tipos de gráficos de controle</strong> - Gráficos de controle para variáveis - Gráficos de controle para atributos</p>
+</div>
+<div id="checkpoint-e-tarefa-premilinar" class="section level4">
+<h4><strong>Checkpoint e Tarefa Premilinar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 18/11/2020 <a href="https://canvas.instructure.com/courses/2212314/quizzes/6444195?module_item_id=39312310">Link</a></p>
+<hr />
+</div>
+</div>
+<div id="semana-14-six-sigma-e-capacidade-de-processos" class="section level2">
+<h2>Semana 14: Six Sigma e Capacidade de processos</h2>
+<div id="documentação-11" class="section level4">
+<h4><strong>Documentação</strong></h4>
+<p>Capacidade de processos</p>
+<ol style="list-style-type: decimal">
+<li><p>Variação total do processo: corresponde a variação do processo devido às causas especiais e comuns. Se a distribuição normal se ajusta bem aos dados, essa variação é estimada pelo desvio padrão amostral usando todas as medidas individuais retiradas do processo, isto é em que representa as medidas do processo, corresponde à média amostral e n o número de medidas obtidas do processo.</p></li>
+<li><p>Variação inerente ao processo: é a parcela da variação total devido às causas comuns. Esta variação pode ser estimada através dos gráficos de controle por ( ) ou ( ), entre outros. Para estimarmos a variabilidade devido às causas comuns é necessário que a distribuição normal se adeque aos dados.</p></li>
+<li><p>Capacidade do processo: é a amplitude que corresponde a 99,73% (6 sigma) da variação inerente ao processo (causas comuns) para um processo sob controle estatístico. Para estimarmos a capacidade do processo é necessário que a distribuição normal se adeque aos dados.</p></li>
+<li><p>Índices de capacidade e performance do processo:</p></li>
+</ol>
+<p>Os índices de capacidade processam as informações de forma que seja possível avaliar se um processo é capaz de gerar produtos que atendam às especificações provenientes dos clientes internos e externos. Os índices de capacidade são adimensionais e permitem uma quantificação do desempenho dos processos.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Cp: corresponde à Amplitude das Especificações (tolerâncias) dividido pela Capacidade do Processo;</p></li>
+<li><p>Cpk: este índice avalia se o processo está centrado. Corresponde ao menor valor entre o Limite Superior de Especificação (LSE) menos a Média e a Média menos o Limite Inferior de Especificação (LIE), divido por metade da Capacidade do Processo (3 sigma)</p></li>
+</ol>
+<iframe width="500" height="200" src="https://www.youtube.com/embed/gDRUEQcKaMo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="500" height="200" src="https://www.youtube.com/embed/rUlL61nXaKM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</p>
+</div>
+<div id="checkpoint-e-tarefa-premilinar-1" class="section level4">
+<h4><strong>Checkpoint e Tarefa Premilinar</strong></h4>
+<p>PRAZO PARA SUBMISSÃO: 24/11/2020 <a href="https://canvas.instructure.com/courses/2212314/assignments/18763665?module_item_id=39449658">Link</a></p>
+</div>
+</div>
+</div>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+</a><br />Esta obra esta licenciada sob Licenca <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuicao-Compartilha Igual 4.0 Internacional</a>.   
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

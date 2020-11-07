@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Dados espaciais no R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<script src="libs/ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="libs/holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77306155-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cursos 1/2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Fundamentos do ERE</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    GIS e Análise Espacial para Ciências Sociais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gis.html">Introdução ao QGIS</a>
+    </li>
+    <li>
+      <a href="qgis.html">QGIS e GeoDa</a>
+    </li>
+    <li>
+      <a href="verifica_qgis.html">Verificação de aprendizagem</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R para Análise Espacial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r.html">Introdução ao R e RStudio</a>
+    </li>
+    <li>
+      <a href="r2.html">Estatística descritiva com o R</a>
+    </li>
+    <li>
+      <a href="r3.html">Gráficos no R</a>
+    </li>
+    <li>
+      <a href="r4.html">Dados espaciais no R</a>
+    </li>
+    <li>
+      <a href="r5.html">Análise espacial no R</a>
+    </li>
+    <li>
+      <a href="r6.html">Medidas centrográficas</a>
+    </li>
+    <li>
+      <a href="materialr.html">Dicas sobre R</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="qualidade.html">Gestão da Qualidade</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/retaoliveira/R">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Dados espaciais no R</h1>
+<h4 class="date">Last updated: 07 novembro, 2020</h4>
+
+</div>
+
+
+<div id="análise-espacial-o-que-representar" class="section level1">
+<h1>Análise Espacial: O que representar?</h1>
+<div id="entidades-realmente-existentes-visíveis" class="section level3">
+<h3>Entidades realmente existentes (visíveis):</h3>
+<p>Exemplos: edificações, ruas.</p>
+</div>
+<div id="conceitos-abstratos-invisíveis" class="section level3">
+<h3>Conceitos abstratos (invisíveis):</h3>
+<p>Exclusão/inclusão social, violência, pobreza/riqueza, desigualdade</p>
+<blockquote>
+<p>Inclui transformações, manipulações e métodos que podem ser aplicados aos dados geográficos para adicionar valor a eles, apoiar decisões e revelar padrões e anomalias que não são óbvios à primeira vista.</p>
+</blockquote>
+<blockquote>
+<p>Métodos de suporte ao <strong>processo decisório</strong></p>
+</blockquote>
+<hr />
+</div>
+<div id="visualização-de-fenômenos-sociais-no-espaço" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Visualização de fenômenos sociais no espaço</h2>
+<div id="mapas-coropléticos" class="section level3">
+<h3>Mapas coropléticos</h3>
+<p><img src="img/coropl.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="mapas-de-pontos" class="section level3">
+<h3>Mapas de pontos</h3>
+<p><img src="img/pontos.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="representação-de-fluxos" class="section level3">
+<h3>Representação de fluxos</h3>
+<p><img src="img/fluxos.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="mapas-de-calor" class="section level3">
+<h3>Mapas de calor</h3>
+<p><img src="img/calor.png" width="60%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="cartogramas" class="section level3">
+<h3>Cartogramas</h3>
+<p><img src="img/1_cartograma.png" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="símbolos-proporcionais" class="section level3">
+<h3>Símbolos proporcionais</h3>
+<p><img src="img/pontos_propo.png" width="55%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="algumas-operações-com-dados-espaciais" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Algumas operações com dados espaciais</h2>
+<div id="agregação-dissolve" class="section level3">
+<h3>Agregação (Dissolve)</h3>
+<ul>
+<li>Elimina divisões indesejáveis considerando os valores de atributos.</li>
+</ul>
+<p><img src="img/1_agregacao.png" width="60%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="união-merge" class="section level3">
+<h3>União (Merge)</h3>
+<ul>
+<li>Combina layers diferentes</li>
+</ul>
+<p><img src="img/2_uniao.png" width="55%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="interseção-espacial-e-operações-de-recorte" class="section level3">
+<h3>Interseção espacial e operações de recorte</h3>
+<ul>
+<li>Interseção - atributos de todas as feições estarão no arquivo de saída considerando a sobreposição</li>
+</ul>
+<p><img src="img/4_intersecao.png" width="55%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Recortar - somente atributos das feições de entrada estarão no arquivo de saída</li>
+</ul>
+<p><img src="img/cortar_1.png" width="55%" style="display: block; margin: auto;" /></p>
+<p><img src="r5_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Para gerar uma análise estatística exploratória dos pontos, utilize:</p>
+<pre><code>##    TORNADX020         YEAR           NUM             STATE           MONTH            DAY              DATE      
+##  Min.   :    1   Min.   :1950   Min.   :  1.00   48     : 7122   Min.   : 1.00   Min.   : 1.0   4/3/1974 :  128  
+##  1st Qu.:11734   1st Qu.:1970   1st Qu.:  7.00   40     : 2959   1st Qu.: 5.00   1st Qu.: 8.0   6/24/2003:   95  
+##  Median :23466   Median :1983   Median : 18.00   20     : 2905   Median : 6.00   Median :16.0   1/21/1999:   86  
+##  Mean   :23466   Mean   :1982   Mean   : 29.23   12     : 2788   Mean   : 6.02   Mean   :15.7   5/30/2004:   81  
+##  3rd Qu.:35199   3rd Qu.:1995   3rd Qu.: 38.00   31     : 2288   3rd Qu.: 7.00   3rd Qu.:23.0   5/4/2003 :   81  
+##  Max.   :46931   Max.   :2004   Max.   :232.00   19     : 1915   Max.   :12.00   Max.   :31.0   5/18/1995:   79  
+##                                                  (Other):26954                                  (Other)  :46381  
+##      TOR_NO           NO_STS        STATE_TOR          SEGNO       STLAT           STLON            SPLAT      
+##  Min.   :   1.0   Min.   :1.000   Min.   :0.0000   Min.   :1   Min.   :18.20   Min.   : 64.90   Min.   : 0.00  
+##  1st Qu.: 214.0   1st Qu.:1.000   1st Qu.:1.0000   1st Qu.:1   1st Qu.:33.13   1st Qu.: 86.85   1st Qu.: 0.00  
+##  Median : 439.0   Median :1.000   Median :1.0000   Median :1   Median :37.08   Median : 94.23   Median : 0.00  
+##  Mean   : 483.9   Mean   :1.007   Mean   :0.9932   Mean   :1   Mean   :37.14   Mean   : 93.07   Mean   :16.59  
+##  3rd Qu.: 695.0   3rd Qu.:1.000   3rd Qu.:1.0000   3rd Qu.:1   3rd Qu.:41.07   3rd Qu.: 98.73   3rd Qu.:36.20  
+##  Max.   :1817.0   Max.   :3.000   Max.   :1.0000   Max.   :1   Max.   :61.02   Max.   :163.53   Max.   :61.02  
+##                                                                                                                
+##      SPLON             LGTH             WIDTH            FATAL                INJ               DAMAGE        
+##  Min.   :  0.00   Min.   :   0.00   Min.   :  0.00   Min.   :  0.00000   Min.   :   0.000   Min.   :   0.000  
+##  1st Qu.:  0.00   1st Qu.:   1.00   1st Qu.:  3.00   1st Qu.:  0.00000   1st Qu.:   0.000   1st Qu.:   0.000  
+##  Median :  0.00   Median :   5.00   Median :  9.00   Median :  0.00000   Median :   0.000   Median :   2.000  
+##  Mean   : 40.96   Mean   :  35.09   Mean   : 23.55   Mean   :  0.09987   Mean   :   1.714   Mean   :   2.271  
+##  3rd Qu.: 91.38   3rd Qu.:  27.00   3rd Qu.: 21.00   3rd Qu.:  0.00000   3rd Qu.:   0.000   3rd Qu.:   4.000  
+##  Max.   :163.53   Max.   :3000.00   Max.   :999.00   Max.   :116.00000   Max.   :1740.000   Max.   :1000.000  
+##                                                                                                               
+##     F_SCALE          coords.x1         coords.x2              geometry    
+##  Min.   :-9.0000   Min.   :-163.53   Min.   :18.20   POINT        :46931  
+##  1st Qu.: 0.0000   1st Qu.: -98.73   1st Qu.:33.13   epsg:NA      :    0  
+##  Median : 1.0000   Median : -94.23   Median :37.08   +proj=long...:    0  
+##  Mean   : 0.4819   Mean   : -93.07   Mean   :37.14                        
+##  3rd Qu.: 1.0000   3rd Qu.: -86.85   3rd Qu.:41.07                        
+##  Max.   : 5.0000   Max.   : -64.90   Max.   :61.02                        
+## </code></pre>
+<pre><code>## Geometry set for 46931 features 
+## geometry type:  POINT
+## dimension:      XY
+## bbox:           xmin: -163.53 ymin: 18.2 xmax: -64.9 ymax: 61.02
+## CRS:             +proj=longlat +ellps=WGS84
+## First 5 geometries:</code></pre>
+<pre><code>## POINT (-88.2 30.67)</code></pre>
+<pre><code>## POINT (-87.92 30.7)</code></pre>
+<pre><code>## POINT (-94.37 34.4)</code></pre>
+<pre><code>## POINT (-92.4 34.48)</code></pre>
+<pre><code>## POINT (-92.95 33.27)</code></pre>
+<p>Se for interessante analisar a incidência de tornados em uma determinada área, pode ser feito:</p>
+<p><img src="r5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Há diferentes formas de recortar um dado espacial. A forma mais simples é usar a extensão espacial de um objeto espacial como um índice para gerar um subconjunto de outro. Veja o exemplo.</p>
+<pre><code>## although coordinates are longitude/latitude, st_intersects assumes that they are planar
+## although coordinates are longitude/latitude, st_intersects assumes that they are planar</code></pre>
+<p><img src="r5_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Entretanto, em alguns contextos, é interessante combinar atributos de diferentes conjuntos de dados com base na localização espacial. A função <code>st_intersection</code> do <code>sf</code> permite gerar a informação conforme exemplo:</p>
+<pre><code>## although coordinates are longitude/latitude, st_intersection assumes that they are planar</code></pre>
+<pre><code>## Warning: attribute variables are assumed to be spatially constant throughout all geometries</code></pre>
+<p><img src="r5_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="diferença" class="section level3">
+<h3>Diferença</h3>
+<ul>
+<li>É o inverso da interseção</li>
+</ul>
+<p><img src="img/5_diferenca.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="buffer" class="section level3">
+<h3>Buffer</h3>
+<p>Em algumas situações, é necessário identificar eventos ou feições que também ocorreram próximas à área de interesse. Eventos ambientais, como tornados, também não estão contidos pelos limites administrativos. Assim, a operação do tipo <em>buffer</em> auxilia na construção dessa área onde podem acontecer os eventos.</p>
+<p>No pacote <code>sf</code>, tem-se a função <code>st_buffer</code>.</p>
+<p>Se for necessário entender a dinâmica de formação dos tornados, seguindo o exemplo anterior, em até 25 km das fronteiras com o estado do Texas, é possível fazer a seguinte análise:</p>
+<p><img src="r5_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="união-espacial" class="section level3">
+<h3>União espacial</h3>
+<p>Em determinadas análises, faz-se necessária a quando é interessante que as áreas de determinados estados, como no exemplo acima, sejam unidas a fim de analisar as feições internas a esse polígono maior. Essa operação pode ser realizada considerando a função <code>st_union</code> e <code>st_combine</code>.</p>
+<p>A função considerada para converter o resultado <code>sfc</code> da união realizada pela função <code>st_union</code> para um objeto <code>sf</code>antes de iniciar a representação pelas funções em <code>tmap</code>.</p>
+<p><img src="r5_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="junção" class="section level3">
+<h3>Junção</h3>
+<ul>
+<li><p>Junção relacional: Combina o conteúdo de duas tabelas usando uma chave comum.</p></li>
+<li><p>Operação ponto em polígono: Compara as propriedades dos pontos com as das áreas onde estão contidos.</p></li>
+<li><p>Sobreposição de feições: Permite determinar se duas áreas se sobrepõe, determinar a área de sobreposição e definir a área formada pela sobreposição.</p></li>
+</ul>
+<div id="junção-relacional" class="section level4">
+<h4>Junção relacional</h4>
+<ul>
+<li>Junção relacional: combina o conteúdo de duas tabelas usando uma chave comum - <strong>NÃO É ESPACIAL!</strong></li>
+</ul>
+<p><img src="img/bd_relacional.png" width="55%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="junção-espacial" class="section level4">
+<h4>Junção espacial</h4>
+<ul>
+<li><p>Operação ponto em polígono: compara as propriedades dos pontos com as das áreas onde estão contidos.</p></li>
+<li><p>Sobreposição de feições: permite determinar se duas áreas se sobrepõe, determinar a área de sobreposição e definir a área formada pela sobreposição.</p></li>
+</ul>
+<p><img src="img/spatial_join.png" width="65%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="seleção-de-polígonos-que-contêm-pontos" class="section level3">
+<h3>Seleção de polígonos que contêm pontos</h3>
+<p>Essa primeira abordagem só permite a seleção de polígonos que contenham pontos. A partir dessa operação, o dataframe do objeto de polígonos não é modificado. Essa operação apenas permite a seleção das feições.</p>
+<pre><code>##    1    2    3    4    5    6 
+##   79  341   87 1121 1445  549</code></pre>
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot; &quot;15&quot; &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot; &quot;21&quot; &quot;22&quot; &quot;23&quot;
+## [24] &quot;24&quot; &quot;25&quot; &quot;26&quot; &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;34&quot; &quot;35&quot; &quot;36&quot; &quot;37&quot; &quot;38&quot; &quot;39&quot; &quot;40&quot; &quot;41&quot; &quot;42&quot; &quot;43&quot; &quot;44&quot; &quot;45&quot; &quot;46&quot;
+## [47] &quot;47&quot; &quot;48&quot; &quot;50&quot;</code></pre>
+<p>Para cômputo da junção espacial, faz-se necessário o uso da função <code>st_join</code>. Essa função promove a adição de uma nova coluna no objeto <code>x</code> a partir de outro <code>y</code>. Por padrão, a junção acontece da esquerda para a direita.</p>
+<pre><code>## although coordinates are longitude/latitude, st_intersects assumes that they are planar
+## although coordinates are longitude/latitude, st_intersects assumes that they are planar</code></pre>
+<pre><code>## Simple feature collection with 6 features and 24 fields
+## geometry type:  POINT
+## dimension:      XY
+## bbox:           xmin: -94.37 ymin: 30.67 xmax: -87.92 ymax: 34.48
+## CRS:             +proj=longlat +ellps=WGS84
+##   TORNADX020 YEAR NUM STATE MONTH DAY      DATE TOR_NO NO_STS STATE_TOR SEGNO STLAT STLON SPLAT SPLON LGTH WIDTH FATAL
+## 0          1 1950   1    01     4  18 4/18/1950     53      1         1     1 30.67 88.20 30.85 88.10  140    30     0
+## 1          2 1950   2    01     4  18 4/18/1950     54      1         1     1 30.70 87.92  0.00  0.00   20    45     0
+## 2          3 1950   1    05     1  13 1/13/1950      4      1         1     1 34.40 94.37  0.00  0.00    6     5     1
+## 3          4 1950   2    05     2  12 2/12/1950     19      1         1     1 34.48 92.40  0.00  0.00    1    30     0
+## 4          5 1950   3    05     2  12 2/12/1950     23      1         1     1 33.27 92.95 33.35 92.95   57    30     0
+## 5          6 1950   4    05     3  26 3/26/1950     33      1         1     1 34.12 93.07 34.32 92.88  174    45     0
+##   INJ DAMAGE F_SCALE coords.x1 coords.x2 STATE_NAME             geometry
+## 0  15      4       3    -88.20     30.67    Alabama  POINT (-88.2 30.67)
+## 1   0      3       2    -87.92     30.70    Alabama  POINT (-87.92 30.7)
+## 2   1      3       3    -94.37     34.40   Arkansas  POINT (-94.37 34.4)
+## 3   0      3       2    -92.40     34.48   Arkansas  POINT (-92.4 34.48)
+## 4   0      4       2    -92.95     33.27   Arkansas POINT (-92.95 33.27)
+## 5   3      4       2    -93.07     34.12   Arkansas POINT (-93.07 34.12)</code></pre>
+<p><img src="r5_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="dados-matriciais" class="section level1">
+<h1>Dados Matriciais</h1>
+<p>Operações de sobreposição são mais simples. Atributos de diferentes matrizes podem ser combinados por meio de álgebra de mapas.</p>
+<p><img src="img/raster.png" width="55%" style="display: block; margin: auto;" /></p>
+<p><img src="img/raster_vec.png" width="55%" style="display: block; margin: auto;" /></p>
+<p><img src="img/Vector-Raster.png" width="35%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="qual-utilizar" class="section level1">
+<h1>Qual utilizar?</h1>
+<p><img src="img/raster_vector.gif" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+</a><br />Esta obra esta licenciada sob Licenca <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuicao-Compartilha Igual 4.0 Internacional</a>.
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>
